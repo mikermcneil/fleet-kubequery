@@ -22,6 +22,6 @@ docker: kubequery
 	docker build -t uptycs/kubequery .
 
 clean:
-	rm -rf kubequery
+	rm -f kubequery
 
 .PHONY: all
