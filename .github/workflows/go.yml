@@ -24,11 +24,11 @@ jobs:
       id: vars
       run: |
         if [[ "$GITHUB_REF" == "refs/heads/master" ]]; then
-          echo ::set-output tag=latest
+          echo ::set-output name=tag::latest
         elif [[ $GITHUB_REF = refs/tags/* ]]; then
-          echo ::set-output tag=$(echo $GITHUB_REF | cut -d / -f 3)
+          echo ::set-output name=tag::$(echo $GITHUB_REF | cut -d / -f 3)
         else
-          echo ::set-output tag=
+          echo ::set-output name=tag::
         fi
 
     - name: Set up Go 1.15
@@ -37,7 +37,9 @@ jobs:
         go-version: 1.15
 
     - name: Build
-      run: make
+      run: |
+        echo "Image tag: ${{ steps.vars.outputs.tag }}"
+        make
 
     - name: FOSSA scan
       uses: fossa-contrib/fossa-action@v1
