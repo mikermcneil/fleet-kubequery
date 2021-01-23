@@ -10,21 +10,23 @@
 all: deps test build
 
 deps:
-	go mod download
+	@go mod download
 
 build: deps
-	go build -ldflags="-s -w" -o . ./...
+	@go build -ldflags="-s -w" -o . ./...
 
 test:
-	go test -race -cover ./...
+	@go test -race -cover ./...
 
 docker: build
-	docker build --build-arg KUBEQUERY_VERSION=latest -t uptycs/kubequery .
+	@docker build --build-arg KUBEQUERY_VERSION=latest -t uptycs/kubequery .
 
-schema: build
-	./genschema > docs/schema.md
+genschema: build
+	@echo "\`\`\`sql" >  docs/schema.md
+	@./genschema   >> docs/schema.md
+	@echo "\`\`\`"    >> docs/schema.md
 
 clean:
-	rm -f kubequery genschema
+	@rm -f kubequery genschema
 
 .PHONY: all

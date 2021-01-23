@@ -19,6 +19,7 @@ import (
 
 type clusterRoleBindingSubject struct {
 	k8s.CommonFields
+	RoleAPIGroup     string
 	RoleName         string
 	RoleKind         string
 	SubjectName      string
@@ -46,6 +47,7 @@ func ClusterRoleBindingSubjectsGenerate(ctx context.Context, queryContext table.
 			for _, s := range crb.Subjects {
 				item := &clusterRoleBindingSubject{
 					CommonFields:     k8s.GetCommonFields(crb.ObjectMeta),
+					RoleAPIGroup:     crb.RoleRef.APIGroup,
 					RoleName:         crb.RoleRef.Name,
 					RoleKind:         crb.RoleRef.Kind,
 					SubjectName:      s.Name,

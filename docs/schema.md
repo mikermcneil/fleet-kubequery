@@ -1,3 +1,4 @@
+```sql
 CREATE TABLE kubernetes_mutating_webhooks(
     `name` TEXT,
     `client_config` TEXT,
@@ -1906,6 +1907,7 @@ CREATE TABLE kubernetes_cluster_role_binding_subjects(
     `creation_timestamp` BIGINT,
     `labels` TEXT,
     `annotations` TEXT,
+    `role_api_group` TEXT,
     `role_name` TEXT,
     `role_kind` TEXT,
     `subject_name` TEXT,
@@ -2033,3 +2035,4 @@ CREATE TABLE kubernetes_volume_attachments(
     `detach_error` TEXT
 );
 
+```

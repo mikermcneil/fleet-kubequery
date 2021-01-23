@@ -78,9 +78,9 @@ For example if `run_as_user` in `kubernetes_pod_security_policies` table looks l
 
 To get the value of `rule`, the following query can be used:
 ```sql
-  SELECT value AS 'rule'
-  FROM kubernetes_pod_security_policies, json_tree(kubernetes_pod_security_policies.run_as_user)
-  WHERE key = 'rule';
+SELECT value AS 'rule'
+FROM kubernetes_pod_security_policies, json_tree(kubernetes_pod_security_policies.run_as_user)
+WHERE key = 'rule';
 
 +------------------+
 | rule             |
