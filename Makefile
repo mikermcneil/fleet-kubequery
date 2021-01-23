@@ -7,21 +7,24 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR GPL-2.0-only)
 
-all: deps test kubequery
+all: deps test build
 
 deps:
 	go mod download
 
-kubequery: deps
+build: deps
 	go build -ldflags="-s -w" -o . ./...
 
 test:
 	go test -race -cover ./...
 
-docker: kubequery
+docker: build
 	docker build --build-arg KUBEQUERY_VERSION=latest -t uptycs/kubequery .
 
+schema: build
+	./genschema > docs/schema.md
+
 clean:
-	rm -f kubequery
+	rm -f kubequery genschema
 
 .PHONY: all

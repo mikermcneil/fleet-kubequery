@@ -20,7 +20,11 @@ import (
 
 type networkPolicy struct {
 	k8s.CommonNamespacedFields
-	v1.NetworkPolicySpec
+	PodSelector metav1.LabelSelector
+	PolicyTypes []v1.PolicyType
+	Type        string
+	Ports       []v1.NetworkPolicyPort
+	FromTo      []v1.NetworkPolicyPeer
 }
 
 // NetworkPolicyColumns returns kubernetes network policy fields as Osquery table columns.
@@ -40,11 +44,28 @@ func NetworkPoliciesGenerate(ctx context.Context, queryContext table.QueryContex
 		}
 
 		for _, np := range nps.Items {
-			item := &networkPolicy{
-				CommonNamespacedFields: k8s.GetCommonNamespacedFields(np.ObjectMeta),
-				NetworkPolicySpec:      np.Spec,
+			for _, i := range np.Spec.Ingress {
+				item := &networkPolicy{
+					CommonNamespacedFields: k8s.GetCommonNamespacedFields(np.ObjectMeta),
+					PodSelector:            np.Spec.PodSelector,
+					PolicyTypes:            np.Spec.PolicyTypes,
+					Type:                   "ingress",
+					Ports:                  i.Ports,
+					FromTo:                 i.From,
+				}
+				results = append(results, k8s.ToMap(item))
 			}
-			results = append(results, k8s.ToMap(item))
+			for _, e := range np.Spec.Egress {
+				item := &networkPolicy{
+					CommonNamespacedFields: k8s.GetCommonNamespacedFields(np.ObjectMeta),
+					PodSelector:            np.Spec.PodSelector,
+					PolicyTypes:            np.Spec.PolicyTypes,
+					Type:                   "egress",
+					Ports:                  e.Ports,
+					FromTo:                 e.To,
+				}
+				results = append(results, k8s.ToMap(item))
+			}
 		}
 
 		if nps.Continue == "" {
