@@ -19,7 +19,7 @@ test:
 	go test -race -cover ./...
 
 docker: kubequery
-	docker build -t uptycs/kubequery .
+	docker build --build-arg KUBEQUERY_VERSION=latest -t uptycs/kubequery .
 
 clean:
 	rm -f kubequery
