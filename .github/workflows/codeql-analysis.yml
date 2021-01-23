@@ -32,3 +32,14 @@ jobs:
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
+
+  fossa:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: FOSSA scan
+      uses: fossa-contrib/fossa-action@v1
+      with:
+        fossa-api-key: ${{ secrets.FOSSA_API_KEY }}
+
