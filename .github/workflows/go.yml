@@ -26,7 +26,7 @@ jobs:
         if [[ "$GITHUB_REF" == "refs/heads/master" ]]; then
           echo ::set-output tag=latest
         elif [[ $GITHUB_REF = refs/tags/* ]]; then
-          echo ::set-output tag=$(echo $GITHUB_REF | cut -d'/'' -f3)
+          echo ::set-output tag=$(echo $GITHUB_REF | cut -d / -f 3)
         else
           echo ::set-output tag=
         fi
