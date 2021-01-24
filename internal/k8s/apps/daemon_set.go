@@ -39,7 +39,7 @@ func DaemonSetsGenerate(ctx context.Context, queryContext table.QueryContext) ([
 	results := make([]map[string]string, 0)
 
 	for {
-		dss, err := k8s.GetClient().AppsV1().DaemonSets(metav1.NamespaceAll).List(context.TODO(), options)
+		dss, err := k8s.GetClient().AppsV1().DaemonSets(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}
@@ -84,7 +84,7 @@ func DaemonSetContainersGenerate(ctx context.Context, queryContext table.QueryCo
 	results := make([]map[string]string, 0)
 
 	for {
-		dss, err := k8s.GetClient().AppsV1().DaemonSets(metav1.NamespaceAll).List(context.TODO(), options)
+		dss, err := k8s.GetClient().AppsV1().DaemonSets(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}
@@ -148,7 +148,7 @@ func DaemonSetVolumesGenerate(ctx context.Context, queryContext table.QueryConte
 	results := make([]map[string]string, 0)
 
 	for {
-		dss, err := k8s.GetClient().AppsV1().DaemonSets(metav1.NamespaceAll).List(context.TODO(), options)
+		dss, err := k8s.GetClient().AppsV1().DaemonSets(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

@@ -34,7 +34,7 @@ func PodSecurityPoliciesGenerate(ctx context.Context, queryContext table.QueryCo
 	results := make([]map[string]string, 0)
 
 	for {
-		psps, err := k8s.GetClient().PolicyV1beta1().PodSecurityPolicies().List(context.TODO(), options)
+		psps, err := k8s.GetClient().PolicyV1beta1().PodSecurityPolicies().List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

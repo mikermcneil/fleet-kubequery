@@ -33,7 +33,7 @@ func CSINodeDriversGenerate(ctx context.Context, queryContext table.QueryContext
 	results := make([]map[string]string, 0)
 
 	for {
-		nodes, err := k8s.GetClient().StorageV1().CSINodes().List(context.TODO(), options)
+		nodes, err := k8s.GetClient().StorageV1().CSINodes().List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

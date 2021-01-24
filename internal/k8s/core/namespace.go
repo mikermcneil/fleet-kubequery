@@ -34,7 +34,7 @@ func NamespacesGenerate(ctx context.Context, queryContext table.QueryContext) ([
 	results := make([]map[string]string, 0)
 
 	for {
-		namespaces, err := k8s.GetClient().CoreV1().Namespaces().List(context.TODO(), options)
+		namespaces, err := k8s.GetClient().CoreV1().Namespaces().List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

@@ -43,7 +43,7 @@ func StatefulSetsGenerate(ctx context.Context, queryContext table.QueryContext) 
 	results := make([]map[string]string, 0)
 
 	for {
-		sss, err := k8s.GetClient().AppsV1().StatefulSets(metav1.NamespaceAll).List(context.TODO(), options)
+		sss, err := k8s.GetClient().AppsV1().StatefulSets(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}
@@ -91,7 +91,7 @@ func StatefulSetContainersGenerate(ctx context.Context, queryContext table.Query
 	results := make([]map[string]string, 0)
 
 	for {
-		sss, err := k8s.GetClient().AppsV1().StatefulSets(metav1.NamespaceAll).List(context.TODO(), options)
+		sss, err := k8s.GetClient().AppsV1().StatefulSets(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}
@@ -155,7 +155,7 @@ func StatefulSetVolumesGenerate(ctx context.Context, queryContext table.QueryCon
 	results := make([]map[string]string, 0)
 
 	for {
-		sss, err := k8s.GetClient().AppsV1().StatefulSets(metav1.NamespaceAll).List(context.TODO(), options)
+		sss, err := k8s.GetClient().AppsV1().StatefulSets(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

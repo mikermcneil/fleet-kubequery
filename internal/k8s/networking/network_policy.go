@@ -38,7 +38,7 @@ func NetworkPoliciesGenerate(ctx context.Context, queryContext table.QueryContex
 	results := make([]map[string]string, 0)
 
 	for {
-		nps, err := k8s.GetClient().NetworkingV1().NetworkPolicies(metav1.NamespaceAll).List(context.TODO(), options)
+		nps, err := k8s.GetClient().NetworkingV1().NetworkPolicies(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

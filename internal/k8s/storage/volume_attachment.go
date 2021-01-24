@@ -35,7 +35,7 @@ func VolumeAttachmentsGenerate(ctx context.Context, queryContext table.QueryCont
 	results := make([]map[string]string, 0)
 
 	for {
-		vas, err := k8s.GetClient().StorageV1().VolumeAttachments().List(context.TODO(), options)
+		vas, err := k8s.GetClient().StorageV1().VolumeAttachments().List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

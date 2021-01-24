@@ -34,7 +34,7 @@ func PodTemplatesGenerate(ctx context.Context, queryContext table.QueryContext) 
 	results := make([]map[string]string, 0)
 
 	for {
-		pts, err := k8s.GetClient().CoreV1().PodTemplates(metav1.NamespaceAll).List(context.TODO(), options)
+		pts, err := k8s.GetClient().CoreV1().PodTemplates(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}
@@ -96,7 +96,7 @@ func PodTemplateContainersGenerate(ctx context.Context, queryContext table.Query
 	results := make([]map[string]string, 0)
 
 	for {
-		pts, err := k8s.GetClient().CoreV1().PodTemplates(metav1.NamespaceAll).List(context.TODO(), options)
+		pts, err := k8s.GetClient().CoreV1().PodTemplates(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}
@@ -142,7 +142,7 @@ func PodTemplateVolumesGenerate(ctx context.Context, queryContext table.QueryCon
 	results := make([]map[string]string, 0)
 
 	for {
-		pts, err := k8s.GetClient().CoreV1().PodTemplates(metav1.NamespaceAll).List(context.TODO(), options)
+		pts, err := k8s.GetClient().CoreV1().PodTemplates(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

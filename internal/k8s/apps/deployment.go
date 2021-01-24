@@ -42,7 +42,7 @@ func DeploymentsGenerate(ctx context.Context, queryContext table.QueryContext) (
 	results := make([]map[string]string, 0)
 
 	for {
-		ds, err := k8s.GetClient().AppsV1().Deployments(metav1.NamespaceAll).List(context.TODO(), options)
+		ds, err := k8s.GetClient().AppsV1().Deployments(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}
@@ -90,7 +90,7 @@ func DeploymentContainersGenerate(ctx context.Context, queryContext table.QueryC
 	results := make([]map[string]string, 0)
 
 	for {
-		ds, err := k8s.GetClient().AppsV1().Deployments(metav1.NamespaceAll).List(context.TODO(), options)
+		ds, err := k8s.GetClient().AppsV1().Deployments(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}
@@ -154,7 +154,7 @@ func DeploymentVolumesGenerate(ctx context.Context, queryContext table.QueryCont
 	results := make([]map[string]string, 0)
 
 	for {
-		ds, err := k8s.GetClient().AppsV1().Deployments(metav1.NamespaceAll).List(context.TODO(), options)
+		ds, err := k8s.GetClient().AppsV1().Deployments(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

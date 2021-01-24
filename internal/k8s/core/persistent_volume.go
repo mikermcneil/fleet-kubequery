@@ -113,7 +113,7 @@ func PersistentVolumesGenerate(ctx context.Context, queryContext table.QueryCont
 	results := make([]map[string]string, 0)
 
 	for {
-		pvs, err := k8s.GetClient().CoreV1().PersistentVolumes().List(context.TODO(), options)
+		pvs, err := k8s.GetClient().CoreV1().PersistentVolumes().List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

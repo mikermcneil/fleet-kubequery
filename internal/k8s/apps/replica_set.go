@@ -38,7 +38,7 @@ func ReplicaSetsGenerate(ctx context.Context, queryContext table.QueryContext) (
 	results := make([]map[string]string, 0)
 
 	for {
-		rss, err := k8s.GetClient().AppsV1().ReplicaSets(metav1.NamespaceAll).List(context.TODO(), options)
+		rss, err := k8s.GetClient().AppsV1().ReplicaSets(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}
@@ -82,7 +82,7 @@ func ReplicaSetContainersGenerate(ctx context.Context, queryContext table.QueryC
 	results := make([]map[string]string, 0)
 
 	for {
-		rss, err := k8s.GetClient().AppsV1().ReplicaSets(metav1.NamespaceAll).List(context.TODO(), options)
+		rss, err := k8s.GetClient().AppsV1().ReplicaSets(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}
@@ -146,7 +146,7 @@ func ReplicaSetVolumesGenerate(ctx context.Context, queryContext table.QueryCont
 	results := make([]map[string]string, 0)
 
 	for {
-		rss, err := k8s.GetClient().AppsV1().ReplicaSets(metav1.NamespaceAll).List(context.TODO(), options)
+		rss, err := k8s.GetClient().AppsV1().ReplicaSets(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

@@ -34,7 +34,7 @@ func RolePolicyRulesGenerate(ctx context.Context, queryContext table.QueryContex
 	results := make([]map[string]string, 0)
 
 	for {
-		roles, err := k8s.GetClient().RbacV1().Roles(metav1.NamespaceAll).List(context.TODO(), options)
+		roles, err := k8s.GetClient().RbacV1().Roles(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

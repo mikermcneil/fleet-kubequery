@@ -35,7 +35,7 @@ func PodDisruptionBudgetsGenerate(ctx context.Context, queryContext table.QueryC
 	results := make([]map[string]string, 0)
 
 	for {
-		pdbs, err := k8s.GetClient().PolicyV1beta1().PodDisruptionBudgets(metav1.NamespaceAll).List(context.TODO(), options)
+		pdbs, err := k8s.GetClient().PolicyV1beta1().PodDisruptionBudgets(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

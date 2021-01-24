@@ -42,7 +42,7 @@ func JobsGenerate(ctx context.Context, queryContext table.QueryContext) ([]map[s
 	results := make([]map[string]string, 0)
 
 	for {
-		jobs, err := k8s.GetClient().BatchV1().Jobs(metav1.NamespaceAll).List(context.TODO(), options)
+		jobs, err := k8s.GetClient().BatchV1().Jobs(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

@@ -41,7 +41,7 @@ func SGClassesGenerate(ctx context.Context, queryContext table.QueryContext) ([]
 	results := make([]map[string]string, 0)
 
 	for {
-		classes, err := k8s.GetClient().StorageV1().StorageClasses().List(context.TODO(), options)
+		classes, err := k8s.GetClient().StorageV1().StorageClasses().List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

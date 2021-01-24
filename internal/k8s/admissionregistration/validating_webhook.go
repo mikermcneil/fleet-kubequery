@@ -33,7 +33,7 @@ func ValidatingWebhooksGenerate(ctx context.Context, queryContext table.QueryCon
 	results := make([]map[string]string, 0)
 
 	for {
-		vwcs, err := k8s.GetClient().AdmissionregistrationV1().ValidatingWebhookConfigurations().List(context.TODO(), options)
+		vwcs, err := k8s.GetClient().AdmissionregistrationV1().ValidatingWebhookConfigurations().List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

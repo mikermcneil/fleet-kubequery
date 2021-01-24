@@ -35,7 +35,7 @@ func ClusterRolePolicyRulesGenerate(ctx context.Context, queryContext table.Quer
 	results := make([]map[string]string, 0)
 
 	for {
-		crs, err := k8s.GetClient().RbacV1().ClusterRoles().List(context.TODO(), options)
+		crs, err := k8s.GetClient().RbacV1().ClusterRoles().List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

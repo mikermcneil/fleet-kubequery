@@ -10,6 +10,7 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"time"
@@ -47,6 +48,7 @@ func main() {
 	if err != nil {
 		panic(fmt.Sprintf("Error launching kubequery: %s\n", err))
 	}
+	defer server.Shutdown(context.Background())
 
 	for _, t := range tables.GetTables() {
 		server.RegisterPlugin(table.NewPlugin(t.Name, t.Columns, t.GenFunc))

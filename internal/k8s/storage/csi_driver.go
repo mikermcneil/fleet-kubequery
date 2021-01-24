@@ -34,7 +34,7 @@ func CSIDriversGenerate(ctx context.Context, queryContext table.QueryContext) ([
 	results := make([]map[string]string, 0)
 
 	for {
-		drivers, err := k8s.GetClient().StorageV1().CSIDrivers().List(context.TODO(), options)
+		drivers, err := k8s.GetClient().StorageV1().CSIDrivers().List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

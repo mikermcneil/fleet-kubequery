@@ -37,7 +37,7 @@ func RoleBindingSubjectsGenerate(ctx context.Context, queryContext table.QueryCo
 	results := make([]map[string]string, 0)
 
 	for {
-		rbs, err := k8s.GetClient().RbacV1().RoleBindings(metav1.NamespaceAll).List(context.TODO(), options)
+		rbs, err := k8s.GetClient().RbacV1().RoleBindings(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

@@ -36,7 +36,7 @@ func CSIStorageCapacitiesGenerate(ctx context.Context, queryContext table.QueryC
 	results := make([]map[string]string, 0)
 
 	for {
-		scs, err := k8s.GetClient().StorageV1alpha1().CSIStorageCapacities(metav1.NamespaceAll).List(context.TODO(), options)
+		scs, err := k8s.GetClient().StorageV1alpha1().CSIStorageCapacities(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

@@ -36,7 +36,7 @@ func ResourceQuotasGenerate(ctx context.Context, queryContext table.QueryContext
 	results := make([]map[string]string, 0)
 
 	for {
-		quotas, err := k8s.GetClient().CoreV1().ResourceQuotas(metav1.NamespaceAll).List(context.TODO(), options)
+		quotas, err := k8s.GetClient().CoreV1().ResourceQuotas(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

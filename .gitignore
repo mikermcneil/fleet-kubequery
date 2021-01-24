@@ -1,4 +1,4 @@
 .vscode
 vendor
 /kubequery
-genschema
+/genschema

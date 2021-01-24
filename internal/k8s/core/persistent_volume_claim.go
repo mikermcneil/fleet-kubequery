@@ -37,7 +37,7 @@ func PersistentVolumeClaimsGenerate(ctx context.Context, queryContext table.Quer
 	results := make([]map[string]string, 0)
 
 	for {
-		pvcs, err := k8s.GetClient().CoreV1().PersistentVolumeClaims(metav1.NamespaceAll).List(context.TODO(), options)
+		pvcs, err := k8s.GetClient().CoreV1().PersistentVolumeClaims(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

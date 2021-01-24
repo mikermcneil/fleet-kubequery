@@ -7,7 +7,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR GPL-2.0-only)
 
-all: deps test build
+all: deps test build kubequery.yaml
 
 deps:
 	@go mod download
@@ -23,7 +23,7 @@ docker: build
 
 genschema: build
 	@echo "\`\`\`sql" >  docs/schema.md
-	@./genschema   >> docs/schema.md
+	@./genschema      >> docs/schema.md
 	@echo "\`\`\`"    >> docs/schema.md
 
 clean:

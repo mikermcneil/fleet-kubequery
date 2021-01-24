@@ -35,7 +35,7 @@ func PodsGenerate(ctx context.Context, queryContext table.QueryContext) ([]map[s
 	results := make([]map[string]string, 0)
 
 	for {
-		pods, err := k8s.GetClient().CoreV1().Pods(metav1.NamespaceAll).List(context.TODO(), options)
+		pods, err := k8s.GetClient().CoreV1().Pods(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}
@@ -119,7 +119,7 @@ func PodContainersGenerate(ctx context.Context, queryContext table.QueryContext)
 	results := make([]map[string]string, 0)
 
 	for {
-		pods, err := k8s.GetClient().CoreV1().Pods(metav1.NamespaceAll).List(context.TODO(), options)
+		pods, err := k8s.GetClient().CoreV1().Pods(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}
@@ -165,7 +165,7 @@ func PodVolumesGenerate(ctx context.Context, queryContext table.QueryContext) ([
 	results := make([]map[string]string, 0)
 
 	for {
-		pods, err := k8s.GetClient().CoreV1().Pods(metav1.NamespaceAll).List(context.TODO(), options)
+		pods, err := k8s.GetClient().CoreV1().Pods(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

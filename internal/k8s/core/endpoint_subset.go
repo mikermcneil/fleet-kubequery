@@ -34,7 +34,7 @@ func EndpointSubsetsGenerate(ctx context.Context, queryContext table.QueryContex
 	results := make([]map[string]string, 0)
 
 	for {
-		endpoints, err := k8s.GetClient().CoreV1().Endpoints(metav1.NamespaceAll).List(context.TODO(), options)
+		endpoints, err := k8s.GetClient().CoreV1().Endpoints(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

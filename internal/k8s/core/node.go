@@ -35,7 +35,7 @@ func NodesGenerate(ctx context.Context, queryContext table.QueryContext) ([]map[
 	results := make([]map[string]string, 0)
 
 	for {
-		nodes, err := k8s.GetClient().CoreV1().Nodes().List(context.TODO(), options)
+		nodes, err := k8s.GetClient().CoreV1().Nodes().List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

@@ -48,7 +48,7 @@ func CronJobsGenerate(ctx context.Context, queryContext table.QueryContext) ([]m
 	results := make([]map[string]string, 0)
 
 	for {
-		cjs, err := k8s.GetClient().BatchV1beta1().CronJobs(metav1.NamespaceAll).List(context.TODO(), options)
+		cjs, err := k8s.GetClient().BatchV1beta1().CronJobs(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

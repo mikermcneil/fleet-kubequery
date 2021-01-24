@@ -33,7 +33,7 @@ func MutatingWebhooksGenerate(ctx context.Context, queryContext table.QueryConte
 	results := make([]map[string]string, 0)
 
 	for {
-		mwcs, err := k8s.GetClient().AdmissionregistrationV1().MutatingWebhookConfigurations().List(context.TODO(), options)
+		mwcs, err := k8s.GetClient().AdmissionregistrationV1().MutatingWebhookConfigurations().List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

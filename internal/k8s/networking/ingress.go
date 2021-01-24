@@ -35,7 +35,7 @@ func IngressesGenerate(ctx context.Context, queryContext table.QueryContext) ([]
 	results := make([]map[string]string, 0)
 
 	for {
-		ingresses, err := k8s.GetClient().NetworkingV1().Ingresses(metav1.NamespaceAll).List(context.TODO(), options)
+		ingresses, err := k8s.GetClient().NetworkingV1().Ingresses(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

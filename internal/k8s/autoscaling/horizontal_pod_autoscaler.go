@@ -35,7 +35,7 @@ func HorizontalPodAutoscalerGenerate(ctx context.Context, queryContext table.Que
 	results := make([]map[string]string, 0)
 
 	for {
-		hpas, err := k8s.GetClient().AutoscalingV1().HorizontalPodAutoscalers(metav1.NamespaceAll).List(context.TODO(), options)
+		hpas, err := k8s.GetClient().AutoscalingV1().HorizontalPodAutoscalers(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

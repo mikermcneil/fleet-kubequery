@@ -34,7 +34,7 @@ func IngressClassesGenerate(ctx context.Context, queryContext table.QueryContext
 	results := make([]map[string]string, 0)
 
 	for {
-		ics, err := k8s.GetClient().NetworkingV1().IngressClasses().List(context.TODO(), options)
+		ics, err := k8s.GetClient().NetworkingV1().IngressClasses().List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

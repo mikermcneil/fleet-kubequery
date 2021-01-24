@@ -38,7 +38,7 @@ func ClusterRoleBindingSubjectsGenerate(ctx context.Context, queryContext table.
 	results := make([]map[string]string, 0)
 
 	for {
-		crbs, err := k8s.GetClient().RbacV1().ClusterRoleBindings().List(context.TODO(), options)
+		crbs, err := k8s.GetClient().RbacV1().ClusterRoleBindings().List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

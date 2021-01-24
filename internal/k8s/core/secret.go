@@ -35,7 +35,7 @@ func SecretsGenerate(ctx context.Context, queryContext table.QueryContext) ([]ma
 	results := make([]map[string]string, 0)
 
 	for {
-		secrets, err := k8s.GetClient().CoreV1().Secrets(metav1.NamespaceAll).List(context.TODO(), options)
+		secrets, err := k8s.GetClient().CoreV1().Secrets(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

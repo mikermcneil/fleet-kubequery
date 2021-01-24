@@ -35,7 +35,7 @@ func ServicesGenerate(ctx context.Context, queryContext table.QueryContext) ([]m
 	results := make([]map[string]string, 0)
 
 	for {
-		services, err := k8s.GetClient().CoreV1().Services(metav1.NamespaceAll).List(context.TODO(), options)
+		services, err := k8s.GetClient().CoreV1().Services(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

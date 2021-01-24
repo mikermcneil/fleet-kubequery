@@ -36,7 +36,7 @@ func ServiceAccountsGenerate(ctx context.Context, queryContext table.QueryContex
 	results := make([]map[string]string, 0)
 
 	for {
-		sas, err := k8s.GetClient().CoreV1().ServiceAccounts(metav1.NamespaceAll).List(context.TODO(), options)
+		sas, err := k8s.GetClient().CoreV1().ServiceAccounts(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}
