@@ -54,7 +54,6 @@ metadata:
 data:
   osquery.flags: |
     --watchdog_level=-1
-    --extensions_require=kubequery
     --disable_memory=true
   osquery.conf: |
     {

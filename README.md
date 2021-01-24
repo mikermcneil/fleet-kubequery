@@ -67,6 +67,8 @@ kubectl apply -f kubequery.yaml
 
 No. kubequery should to be deployed as a [Kubernetes Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/). Which means there will be one [Pod](https://kubernetes.io/docs/concepts/workloads/pods/) of kubequery running per Kubernetes cluster. Osquery should be deployed to every node in the cluster. Querying most Osquery tables from an ephemeral pod does not provide much value. kubequery container image also runs as non-root user, which means most of the Osquery tables will either return an error or partial data.
 
+![Deployment](docs/deployment.svg)
+
 ### Why are some columns JSON?
 
 Normalizing nested JSON data like Kubernetes API responses will create an explosion of tables. So some of the columns in kuberenetes tables are left as JSON. Data is eventually processed by [SQLite](https://www.sqlite.org/index.html) with-in Osquery. SQLite has very [good JSON](https://www.sqlite.org/json1.html) support.

@@ -44,5 +44,6 @@ ENTRYPOINT ["/usr/bin/osqueryd", \
                 "--pidfile=/opt/kubequery/osqueryd.pid", \
                 "--logger_path=/opt/kubequery/logs", \
                 "--extension=/usr/bin/kubequery", \
+                "--extensions_require=kubequery", \
                 "--extensions_socket=/opt/kubequery/osquery.em" \
            ]
