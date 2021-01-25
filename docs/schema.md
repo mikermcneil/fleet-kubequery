@@ -1845,7 +1845,7 @@ CREATE TABLE kubernetes_network_policies(
     `from_to` TEXT
 );
 
-CREATE TABLE kubernetes_pod_disruption_budget(
+CREATE TABLE kubernetes_pod_disruption_budgets(
     `uid` TEXT,
     `cluster_name` TEXT,
     `cluster_uid` TEXT,
@@ -1915,7 +1915,7 @@ CREATE TABLE kubernetes_cluster_role_binding_subjects(
     `subject_namespace` TEXT
 );
 
-CREATE TABLE kubernetes_cluster_role_policy_rule(
+CREATE TABLE kubernetes_cluster_role_policy_rules(
     `uid` TEXT,
     `cluster_name` TEXT,
     `cluster_uid` TEXT,
@@ -1947,7 +1947,7 @@ CREATE TABLE kubernetes_role_binding_subjects(
     `subject_namespace` TEXT
 );
 
-CREATE TABLE kubernetes_role_policy_rule(
+CREATE TABLE kubernetes_role_policy_rules(
     `uid` TEXT,
     `cluster_name` TEXT,
     `cluster_uid` TEXT,

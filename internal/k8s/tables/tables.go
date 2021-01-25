@@ -87,14 +87,14 @@ func GetTables() []Table {
 		{"kubernetes_network_policies", networking.NetworkPolicyColumns(), networking.NetworkPoliciesGenerate},
 
 		// Policy
-		{"kubernetes_pod_disruption_budget", policy.PodDisruptionBudgetColumns(), policy.PodDisruptionBudgetsGenerate},
+		{"kubernetes_pod_disruption_budgets", policy.PodDisruptionBudgetColumns(), policy.PodDisruptionBudgetsGenerate},
 		{"kubernetes_pod_security_policies", policy.PodSecurityPolicyColumns(), policy.PodSecurityPoliciesGenerate},
 
 		// RBAC
 		{"kubernetes_cluster_role_binding_subjects", rbac.ClusterRoleBindingSubjectColumns(), rbac.ClusterRoleBindingSubjectsGenerate},
-		{"kubernetes_cluster_role_policy_rule", rbac.ClusterRolePolicyRuleColumns(), rbac.ClusterRolePolicyRulesGenerate},
+		{"kubernetes_cluster_role_policy_rules", rbac.ClusterRolePolicyRuleColumns(), rbac.ClusterRolePolicyRulesGenerate},
 		{"kubernetes_role_binding_subjects", rbac.RoleBindingSubjectColumns(), rbac.RoleBindingSubjectsGenerate},
-		{"kubernetes_role_policy_rule", rbac.RolePolicyRuleColumns(), rbac.RolePolicyRulesGenerate},
+		{"kubernetes_role_policy_rules", rbac.RolePolicyRuleColumns(), rbac.RolePolicyRulesGenerate},
 
 		// Storage
 		{"kubernetes_csi_drivers", storage.CSIDriverColumns(), storage.CSIDriversGenerate},

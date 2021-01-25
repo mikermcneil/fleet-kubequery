@@ -17,19 +17,23 @@ LABEL \
   url="https://github.com/Uptycs/kubequery"
 
 ADD https://pkg.osquery.io/deb/osquery_${OSQUERY_VERSION}-1.linux_amd64.deb /tmp/osquery.deb
-ADD kubequery /usr/bin/kubequery
+ADD kubequery /usr/bin/kubequery.ext
 
 RUN set -ex; \
     DEBIAN_FRONTEND=noninteractive apt-get update -y && \
     DEBIAN_FRONTEND=noninteractive apt-get upgrade -y && \
-    chmod 700 /usr/bin/kubequery && \
+    DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends curl jq -y && \
     dpkg -i /tmp/osquery.deb && \
     /etc/init.d/osqueryd stop && \
     rm -rf /var/osquery/* /var/log/osquery/* /var/lib/apt/lists/* /var/cache/apt/* /tmp/* && \
     groupadd -g 1000 kubequery && \
     useradd -m -g kubequery -u 1000 -d /opt/kubequery -s /bin/bash kubequery && \
-    mkdir /opt/kubequery/logs && \
-    chown kubequery:kubequery /usr/bin/osquery? /usr/bin/kubequery /opt/kubequery/logs
+    mkdir /opt/kubequery/var && \
+    echo "/usr/bin/kubequery.ext" > /opt/kubequery/autoload.exts && \
+    chmod 700 /usr/bin/kubequery.ext && \
+    chown kubequery:kubequery /usr/bin/osquery? /usr/bin/kubequery.ext /opt/kubequery/autoload.exts /opt/kubequery/var
+
+COPY entrypoint.sh /opt/kubequery/entrypoint.sh
 
 # NOTE: Not running as root breaks bunch of Osquery tables. But Osquery tables are meaningless
 #       in the context of kubequery as the pod is ephemeral in nature
@@ -37,13 +41,4 @@ USER kubequery
 
 WORKDIR /opt/kubequery
 
-ENTRYPOINT ["/usr/bin/osqueryd", \
-                "--flagfile=/opt/kubequery/etc/osquery.flags", \
-                "--config_path=/opt/kubequery/etc/osquery.conf", \
-                "--database_path=/opt/kubequery/osquery.db", \
-                "--pidfile=/opt/kubequery/osqueryd.pid", \
-                "--logger_path=/opt/kubequery/logs", \
-                "--extension=/usr/bin/kubequery", \
-                "--extensions_require=kubequery", \
-                "--extensions_socket=/opt/kubequery/osquery.em" \
-           ]
+ENTRYPOINT ["/opt/kubequery/entrypoint.sh"]
