@@ -13,7 +13,7 @@ Reading and following these guidelines will help us make the contribution proces
 
 ## Code of Conduct
 
-By participating and contributing to this project, you agree to uphold our [Code of Conduct](https://github.com/Uptycs/kubequery/blob/master/CODE_OF_-_CONDUCT.md).
+By participating and contributing to this project, you agree to uphold our [Code of Conduct](https://github.com/Uptycs/kubequery/blob/master/CODE_OF_CONDUCT.md).
 
 ## Getting Started
 
