@@ -57,7 +57,7 @@ func TestJobsGenerate(t *testing.T) {
 				},
 			},
 		},
-	}), types.UID("hello"))
+	}), types.UID("hello"), "")
 
 	js, err := JobsGenerate(context.TODO(), table.QueryContext{})
 	assert.Nil(t, err)

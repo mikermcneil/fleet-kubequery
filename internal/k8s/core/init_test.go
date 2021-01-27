@@ -74,5 +74,6 @@ func init() {
 	services := &v1.Service{}
 	loadTestResource("services_test.json", services)
 
-	k8s.SetClient(fake.NewSimpleClientset(lr, cm, ep, ns, node, pod, secret, sa, services), types.UID("d7fd8e77-93de-4742-9037-5db9a01e966a"))
+	k8s.SetClient(fake.NewSimpleClientset(lr, cm, ep, ns, node, pod, secret, sa, services),
+		types.UID("d7fd8e77-93de-4742-9037-5db9a01e966a"), "")
 }

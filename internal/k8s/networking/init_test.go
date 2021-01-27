@@ -41,5 +41,5 @@ func init() {
 	npl := &v1.NetworkPolicyList{}
 	loadTestResource("network_policy_test.json", npl)
 
-	k8s.SetClient(fake.NewSimpleClientset(ig, igc, npl), types.UID("c7fd8e77-93de-4742-9037-5db9a01e966a"))
+	k8s.SetClient(fake.NewSimpleClientset(ig, igc, npl), types.UID("c7fd8e77-93de-4742-9037-5db9a01e966a"), "")
 }

@@ -37,7 +37,7 @@ func TestMutatingWebhooksGenerate(t *testing.T) {
 				ClientConfig:   v1.WebhookClientConfig{URL: &url},
 			},
 		},
-	}), types.UID(""))
+	}), types.UID(""), "")
 
 	mws, err := MutatingWebhooksGenerate(context.TODO(), table.QueryContext{})
 	assert.Nil(t, err)

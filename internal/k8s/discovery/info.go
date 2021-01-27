@@ -19,7 +19,8 @@ import (
 )
 
 type info struct {
-	ClusterUID types.UID
+	ClusterUID  types.UID
+	ClusterName string
 	version.Info
 }
 
@@ -38,8 +39,9 @@ func InfoGenerate(ctx context.Context, queryContext table.QueryContext) ([]map[s
 	}
 
 	item := &info{
-		ClusterUID: k8s.GetClusterUID(),
-		Info:       *sv,
+		ClusterUID:  k8s.GetClusterUID(),
+		ClusterName: k8s.GetClusterName(),
+		Info:        *sv,
 	}
 	results = append(results, k8s.ToMap(item))
 

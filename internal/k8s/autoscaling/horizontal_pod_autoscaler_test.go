@@ -47,7 +47,7 @@ func TestHorizontalPodAutoscalerGenerate(t *testing.T) {
 			DesiredReplicas:                 i32,
 			CurrentCPUUtilizationPercentage: &i32,
 		},
-	}), types.UID("hello"))
+	}), types.UID("hello"), "")
 
 	hpas, err := HorizontalPodAutoscalerGenerate(context.TODO(), table.QueryContext{})
 	assert.Nil(t, err)

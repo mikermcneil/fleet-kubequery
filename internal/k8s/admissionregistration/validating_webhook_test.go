@@ -37,7 +37,7 @@ func TestValidatingWebhooksGenerate(t *testing.T) {
 				ClientConfig:   v1.WebhookClientConfig{URL: &url},
 			},
 		},
-	}), types.UID(""))
+	}), types.UID(""), "")
 
 	mws, err := ValidatingWebhooksGenerate(context.TODO(), table.QueryContext{})
 	assert.Nil(t, err)

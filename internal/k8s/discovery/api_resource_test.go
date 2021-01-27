@@ -22,7 +22,7 @@ import (
 
 func TestAPIResourcesGenerate(t *testing.T) {
 	clientset := fake.NewSimpleClientset()
-	k8s.SetClient(clientset, types.UID("hello"))
+	k8s.SetClient(clientset, types.UID("hello"), "cluster-name")
 
 	ars, err := APIResourcesGenerate(context.TODO(), table.QueryContext{})
 	assert.Nil(t, err)

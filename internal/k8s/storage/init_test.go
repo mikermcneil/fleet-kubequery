@@ -41,5 +41,5 @@ func init() {
 	sc := &v1.StorageClass{}
 	loadTestResource("storage_class_test.json", sc)
 
-	k8s.SetClient(fake.NewSimpleClientset(cd, cnd, sc), types.UID("e7fd8e77-93de-4742-9037-5db9a01e966a"))
+	k8s.SetClient(fake.NewSimpleClientset(cd, cnd, sc), types.UID("e7fd8e77-93de-4742-9037-5db9a01e966a"), "")
 }

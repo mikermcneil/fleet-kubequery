@@ -39,5 +39,5 @@ func init() {
 	psp := &v1beta1.PodSecurityPolicy{}
 	loadTestResource("pod_security_policy_test.json", psp)
 
-	k8s.SetClient(fake.NewSimpleClientset(pdb, psp), types.UID("b7fd8e77-93de-4742-9037-5db9a01e966a"))
+	k8s.SetClient(fake.NewSimpleClientset(pdb, psp), types.UID("b7fd8e77-93de-4742-9037-5db9a01e966a"), "")
 }

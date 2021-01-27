@@ -43,5 +43,5 @@ func init() {
 	ss := &v1.StatefulSet{}
 	loadTestResource("stateful_set_test.json", ss)
 
-	k8s.SetClient(fake.NewSimpleClientset(ds, d, rs, ss), types.UID("blah"))
+	k8s.SetClient(fake.NewSimpleClientset(ds, d, rs, ss), types.UID("blah"), "")
 }

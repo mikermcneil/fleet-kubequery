@@ -23,13 +23,16 @@ func TestInitClientset(t *testing.T) {
 }
 
 func TestGetClient(t *testing.T) {
-	SetClient(fake.NewSimpleClientset(), types.UID(""))
-	clientset := GetClient()
-	assert.NotNil(t, clientset, "Clientset should be valid")
+	SetClient(fake.NewSimpleClientset(), types.UID("uid"), "cluster-name")
+	assert.NotNil(t, GetClient(), "Clientset should be valid")
 }
 
 func TestGetClusterUID(t *testing.T) {
-	uid := types.UID("")
-	SetClient(fake.NewSimpleClientset(), uid)
-	assert.Equal(t, uid, GetClusterUID())
+	SetClient(fake.NewSimpleClientset(), types.UID("uid"), "cluster-name")
+	assert.Equal(t, types.UID("uid"), GetClusterUID())
+}
+
+func TestGetClusterName(t *testing.T) {
+	SetClient(fake.NewSimpleClientset(), types.UID("uid"), "cluster-name")
+	assert.Equal(t, "cluster-name", GetClusterName())
 }

@@ -11,6 +11,8 @@ package k8s
 
 import (
 	"context"
+	"fmt"
+	"os"
 	"sync"
 
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -20,9 +22,10 @@ import (
 )
 
 var (
-	lock       sync.Mutex
-	clientset  kubernetes.Interface
-	clusterUID types.UID
+	lock        sync.Mutex
+	clientset   kubernetes.Interface
+	clusterUID  types.UID
+	clusterName string
 )
 
 func initClientset(config *rest.Config) error {
@@ -48,7 +51,17 @@ func initUID() error {
 	if err != nil {
 		return err
 	}
+
 	clusterUID = ks.UID
+	if ks.ClusterName == "" {
+		clusterName, err = os.Hostname()
+		if err != nil {
+			fmt.Println("Unable to determine hostname: ", err.Error())
+		}
+	} else {
+		clusterName = ks.ClusterName
+	}
+
 	return nil
 }
 
@@ -81,11 +94,18 @@ func GetClusterUID() types.UID {
 	return clusterUID
 }
 
+// GetClusterName returns cluster name provided by the kubernates API.
+// If it is empty, it uses the pod hostname which should be set to the cluster name.
+func GetClusterName() string {
+	return clusterName
+}
+
 // SetClient is helper function to override the kubernetes interface with fake one for testing.
-func SetClient(c kubernetes.Interface, u types.UID) {
+func SetClient(client kubernetes.Interface, uid types.UID, name string) {
 	lock.Lock()
 	defer lock.Unlock()
 
-	clientset = c
-	clusterUID = u
+	clientset = client
+	clusterUID = uid
+	clusterName = name
 }

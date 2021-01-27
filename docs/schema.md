@@ -1790,6 +1790,7 @@ CREATE TABLE kubernetes_api_resources(
 
 CREATE TABLE kubernetes_info(
     `cluster_uid` TEXT,
+    `cluster_name` TEXT,
     `major` TEXT,
     `minor` TEXT,
     `git_version` TEXT,

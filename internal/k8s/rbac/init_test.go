@@ -43,5 +43,5 @@ func init() {
 	crbs := &v1.ClusterRoleBindingList{}
 	loadTestResource("cluster_role_binding_subject_test.json", crbs)
 
-	k8s.SetClient(fake.NewSimpleClientset(rs, rbs, crs, crbs), types.UID("a7fd8e77-93de-4742-9037-5db9a01e966a"))
+	k8s.SetClient(fake.NewSimpleClientset(rs, rbs, crs, crbs), types.UID("a7fd8e77-93de-4742-9037-5db9a01e966a"), "")
 }

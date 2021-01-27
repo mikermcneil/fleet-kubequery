@@ -61,7 +61,7 @@ func TestCronJobsGenerate(t *testing.T) {
 		Status: v1beta1.CronJobStatus{
 			LastScheduleTime: &metav1.Time{},
 		},
-	}), types.UID("hello"))
+	}), types.UID("hello"), "")
 
 	cjs, err := CronJobsGenerate(context.TODO(), table.QueryContext{})
 	assert.Nil(t, err)
