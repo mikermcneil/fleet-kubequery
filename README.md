@@ -1,4 +1,9 @@
-![Build](https://github.com/Uptycs/kubequery/workflows/Build/badge.svg?branch=master) [![Go Report Card](https://goreportcard.com/badge/github.com/Uptycs/kubequery)](https://goreportcard.com/report/github.com/Uptycs/kubequery) [![FOSSA Status](https://app.fossa.com/api/projects/custom%2B22616%2Fgit%40github.com%3AUptycs%2Fkubequery.git.svg?type=shield)](https://app.fossa.com/projects/custom%2B22616%2Fgit%40github.com%3AUptycs%2Fkubequery.git?ref=badge_shield) ![CodeQL](https://github.com/Uptycs/kubequery/workflows/CodeQL/badge.svg?branch=master)
+[![Build](https://github.com/Uptycs/kubequery/workflows/Build/badge.svg?branch=master)](https://github.com/Uptycs/kubequery/actions?query=workflow%3ABuild)
+[![CodeQL](https://github.com/Uptycs/kubequery/workflows/CodeQL/badge.svg?branch=master)](https://github.com/Uptycs/kubequery/actions?query=workflow%3ACodeQL)
+[![Go Report Card](https://goreportcard.com/badge/github.com/Uptycs/kubequery)](https://goreportcard.com/report/github.com/Uptycs/kubequery)
+[![FOSSA Status](https://app.fossa.com/api/projects/custom%2B22616%2Fgit%40github.com%3AUptycs%2Fkubequery.git.svg?type=shield)](https://app.fossa.com/projects/custom%2B22616%2Fgit%40github.com%3AUptycs%2Fkubequery.git?ref=badge_shield)
+
+---
 
 # kubequery powered by Osquery
 
@@ -6,8 +11,9 @@ kubequery is a [Osquery](https://osquery.io) extension that provides SQL based a
 
 kubequery will be packaged as docker image available from [dockerhub](https://hub.docker.com/r/uptycs/kubequery). It is expected to be deployed as a [Kubernetes Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment) per cluster. A sample deployment template is available [here](kubequery.yaml)
 
-
 kubequery tables [schema is available here](docs/schema.md)
+
+---
 
 ## Build
 
@@ -19,6 +25,8 @@ docker pull uptycs/kubequery:latest
 ```
 
 For production, tagged container images should be used instead of `latest`.
+
+---
 
 ## Deployment
 
@@ -56,6 +64,7 @@ By default pod resource `requests` and `limits` are set to 500m (half a core) an
 ```sh
 kubectl apply -f kubequery.yaml
 ```
+---
 
 ## FAQ
 
