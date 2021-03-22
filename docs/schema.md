@@ -210,7 +210,7 @@ CREATE TABLE kubernetes_daemon_set_volumes(
     `downward_api_default_mode` INTEGER,
     `fc_target_ww_ns` TEXT,
     `fc_lun` INTEGER,
-    `fc_wwi_ds` TEXT,
+    `fc_ww_ids` TEXT,
     `azure_file_share_name` TEXT,
     `config_map_name` TEXT,
     `config_map_items` TEXT,
@@ -432,7 +432,7 @@ CREATE TABLE kubernetes_deployments_volumes(
     `downward_api_default_mode` INTEGER,
     `fc_target_ww_ns` TEXT,
     `fc_lun` INTEGER,
-    `fc_wwi_ds` TEXT,
+    `fc_ww_ids` TEXT,
     `azure_file_share_name` TEXT,
     `config_map_name` TEXT,
     `config_map_items` TEXT,
@@ -648,7 +648,7 @@ CREATE TABLE kubernetes_replica_set_volumes(
     `downward_api_default_mode` INTEGER,
     `fc_target_ww_ns` TEXT,
     `fc_lun` INTEGER,
-    `fc_wwi_ds` TEXT,
+    `fc_ww_ids` TEXT,
     `azure_file_share_name` TEXT,
     `config_map_name` TEXT,
     `config_map_items` TEXT,
@@ -871,7 +871,7 @@ CREATE TABLE kubernetes_stateful_set_volumes(
     `downward_api_default_mode` INTEGER,
     `fc_target_ww_ns` TEXT,
     `fc_lun` INTEGER,
-    `fc_wwi_ds` TEXT,
+    `fc_ww_ids` TEXT,
     `azure_file_share_name` TEXT,
     `config_map_name` TEXT,
     `config_map_items` TEXT,
@@ -1140,7 +1140,7 @@ CREATE TABLE kubernetes_nodes(
     `labels` TEXT,
     `annotations` TEXT,
     `pod_cidr` TEXT,
-    `pod_cid_rs` TEXT,
+    `pod_cidrs` TEXT,
     `provider_id` TEXT,
     `unschedulable` INTEGER,
     `taints` TEXT,
@@ -1237,7 +1237,7 @@ CREATE TABLE kubernetes_persistent_volumes(
     `flocker_dataset_uuid` TEXT,
     `fc_target_ww_ns` TEXT,
     `fc_lun` INTEGER,
-    `fc_wwi_ds` TEXT,
+    `fc_ww_ids` TEXT,
     `azure_file_share_name` TEXT,
     `vsphere_volume_volume_path` TEXT,
     `vsphere_volume_storage_policy_name` TEXT,
@@ -1436,7 +1436,7 @@ CREATE TABLE kubernetes_pod_templates_volumes(
     `downward_api_default_mode` INTEGER,
     `fc_target_ww_ns` TEXT,
     `fc_lun` INTEGER,
-    `fc_wwi_ds` TEXT,
+    `fc_ww_ids` TEXT,
     `azure_file_share_name` TEXT,
     `config_map_name` TEXT,
     `config_map_items` TEXT,
@@ -1663,7 +1663,7 @@ CREATE TABLE kubernetes_pod_volumes(
     `downward_api_default_mode` INTEGER,
     `fc_target_ww_ns` TEXT,
     `fc_lun` INTEGER,
-    `fc_wwi_ds` TEXT,
+    `fc_ww_ids` TEXT,
     `azure_file_share_name` TEXT,
     `config_map_name` TEXT,
     `config_map_items` TEXT,
@@ -1954,7 +1954,7 @@ CREATE TABLE kubernetes_cluster_role_policy_rules(
     `api_groups` TEXT,
     `resources` TEXT,
     `resource_names` TEXT,
-    `non_resource_ur_ls` TEXT,
+    `non_resource_urls` TEXT,
     `aggregation_rule` TEXT
 );
 
@@ -1987,7 +1987,7 @@ CREATE TABLE kubernetes_role_policy_rules(
     `api_groups` TEXT,
     `resources` TEXT,
     `resource_names` TEXT,
-    `non_resource_ur_ls` TEXT
+    `non_resource_urls` TEXT
 );
 
 CREATE TABLE kubernetes_csi_drivers(

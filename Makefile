@@ -7,7 +7,7 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR GPL-2.0-only)
 
-all: deps test build kubequery.yaml
+all: deps test build
 
 deps:
 	@go mod download

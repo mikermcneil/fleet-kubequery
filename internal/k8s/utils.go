@@ -21,9 +21,19 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
+var replacements = map[string]string{
+	"IPs":   "Ips",
+	"URLs":  "Urls",
+	"CIDRs": "Cidrs",
+	"WWIDs": "WwIds",
+	"WWNs":  "WwNs",
+}
+
 func makeKey(name string) string {
-	if strings.Contains(name, "IPs") {
-		name = strings.Replace(name, "IPs", "Ips", 1)
+	for k, v := range replacements {
+		if strings.Contains(name, k) {
+			name = strings.Replace(name, k, v, 1)
+		}
 	}
 	return strcase.ToSnake(name)
 }
