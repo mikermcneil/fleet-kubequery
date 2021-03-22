@@ -121,7 +121,7 @@ spec:
       serviceAccountName: kubequery-sa
       containers:
         - name: kubequery
-          image: uptycs/kubequery:0.2.0
+          image: uptycs/kubequery:0.3.0
           imagePullPolicy: Always
           resources:
             limits:

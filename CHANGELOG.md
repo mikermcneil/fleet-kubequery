@@ -1,5 +1,31 @@
 # kubequery change log
 
+<a name="0.3.0"></a>
+## [0.3.0](https://github.com/Uptycs/kubequery/releases/tag/0.3.0)
+
+[Git Commits](https://github.com/Uptycs/kubequery/compare/0.2.0...0.3.0)
+
+### New Features
+
+### Under the Hood improvements
+
+* Upgrade to basequery 4.7.0
+
+### Table Changes
+
+### Bug Fixes
+
+### Documentation
+
+* Validate the installation was successful [PR-12](https://github.com/Uptycs/kubequery/pull/12)
+
+### Build
+
+### Security Issues
+
+### Packs
+
+
 <a name="0.2.0"></a>
 ## [0.2.0](https://github.com/Uptycs/kubequery/releases/tag/0.2.0)
 
@@ -19,16 +45,12 @@
 
 ### Bug Fixes
 
-
 ### Documentation
 
 * Validate the installation was successful [PR-12](https://github.com/Uptycs/kubequery/pull/12)
 
 ### Build
 
-
 ### Security Issues
 
-
 ### Packs
-
