@@ -26,6 +26,9 @@ import (
 )
 
 var (
+	VERSION = "latest"
+
+	version  = flag.Bool("version", false, "Prints kubequery version")
 	verbose  = flag.Bool("verbose", false, "Whether to enable verbose logging")
 	socket   = flag.String("socket", "", "Path to the extensions UNIX domain socket")
 	timeout  = flag.Int("timeout", 5, "Seconds to wait for autoloaded extensions")
@@ -34,6 +37,12 @@ var (
 
 func main() {
 	flag.Parse()
+
+	if *version {
+		fmt.Println("kubequery version:", VERSION)
+		os.Exit(0)
+	}
+
 	if *socket == "" {
 		panic("Missing required --socket argument")
 	}
@@ -43,11 +52,10 @@ func main() {
 		panic(fmt.Sprintf("Error connecting to kubernetes API server: %s", err))
 	}
 
-	// TODO: Version
 	server, err := osquery.NewExtensionManagerServer(
 		"kubequery",
 		*socket,
-		osquery.ServerVersion("1.0.0"),
+		osquery.ServerVersion(VERSION),
 		osquery.ServerTimeout(time.Second*time.Duration(*timeout)),
 		osquery.ServerPingInterval(time.Second*time.Duration(*interval)),
 	)

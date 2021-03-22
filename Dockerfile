@@ -7,7 +7,7 @@
 
 FROM ubuntu:20.04
 
-ARG BASEQUERY_VERSION=4.6.0
+ARG BASEQUERY_VERSION=4.7.0
 ARG KUBEQUERY_VERSION
 
 LABEL \
@@ -18,6 +18,7 @@ LABEL \
 
 ADD https://uptycs-basequery.s3.amazonaws.com/${BASEQUERY_VERSION}/basequery_${BASEQUERY_VERSION}-1.linux_amd64.deb /tmp/basequery.deb
 
+COPY entrypoint.sh /usr/local/bin/
 COPY kubequery /usr/local/bin/kubequery.ext
 
 RUN set -ex; \
@@ -29,17 +30,17 @@ RUN set -ex; \
     rm -rf /var/osquery/* /var/log/osquery/* /var/lib/apt/lists/* /var/cache/apt/* /tmp/* && \
     groupadd -g 1000 kubequery && \
     useradd -m -g kubequery -u 1000 -d /opt/kubequery -s /bin/bash kubequery && \
-    mkdir /opt/kubequery/var && \
-    echo "/usr/local/bin/kubequery.ext" > /opt/kubequery/autoload.exts && \
-    chmod 700 /usr/local/bin/kubequery.ext && \
-    chown kubequery:kubequery /usr/bin/osquery? /usr/local/bin/kubequery.ext /opt/kubequery/autoload.exts /opt/kubequery/var
-
-COPY entrypoint.sh /opt/kubequery/entrypoint.sh
+    mkdir /opt/kubequery/var /opt/kubequery/logs /opt/kubequery/etc && \
+    echo "/usr/local/bin/kubequery.ext" > /opt/kubequery/etc/autoload.exts && \
+    chmod 700 /usr/local/bin/* && \
+    chown kubequery:kubequery /usr/bin/osquery? /usr/local/bin/* /opt/kubequery/*
 
 # NOTE: Not running as root breaks bunch of Osquery tables. But Osquery tables are meaningless
 #       in the context of kubequery as the pod is ephemeral in nature
 USER kubequery
 
+ENV KUBEQUERY_VERSION=${KUBEQUERY_VERSION}
+
 WORKDIR /opt/kubequery
 
-ENTRYPOINT ["/opt/kubequery/entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

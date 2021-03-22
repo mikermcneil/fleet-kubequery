@@ -54,6 +54,8 @@ metadata:
 data:
   osquery.flags: |
     # Update flags to suit your requirements
+    --ephemeral=true
+    --disable_logging=true
     --disable_memory=true
     --extensions_interval=5
     --extensions_timeout=5
@@ -130,7 +132,7 @@ spec:
               memory: 200Mi
           volumeMounts:
           - name: config
-            mountPath: /opt/kubequery/etc
+            mountPath: /opt/kubequery/config
       volumes:
       - name: config
         configMap:

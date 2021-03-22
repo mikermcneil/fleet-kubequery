@@ -13,13 +13,13 @@ deps:
 	@go mod download
 
 build: deps
-	@go build -ldflags="-s -w" -o . ./...
+	@go build -ldflags="-s -w -X main.VERSION=${VERSION}" -o . ./...
 
 test:
 	@go test -race -cover ./...
 
 docker: build
-	@docker build --build-arg KUBEQUERY_VERSION=latest -t uptycs/kubequery:latest .
+	@docker build --build-arg KUBEQUERY_VERSION=${VERSION} -t uptycs/kubequery:${VERSION} .
 
 genschema: build
 	@echo "\`\`\`sql" >  docs/schema.md
@@ -30,3 +30,4 @@ clean:
 	@rm -f kubequery genschema
 
 .PHONY: all
+    VERSION := $(shell git describe --tags HEAD)

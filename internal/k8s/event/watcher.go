@@ -11,6 +11,7 @@ package event
 
 import (
 	"context"
+	"sync"
 	"time"
 
 	osquery "github.com/Uptycs/basequery-go"
@@ -27,6 +28,7 @@ const tableName = "kubernetes_events"
 
 // Watcher holds the kubernetes informer. Can be started to receive events from k8s.
 type Watcher struct {
+	lock     sync.Mutex
 	client   *osquery.ExtensionManagerClient
 	stopper  chan struct{}
 	informer cache.SharedInformer
@@ -125,13 +127,19 @@ func CreateEventWatcher(socket string, timeout time.Duration) (*Watcher, error) 
 
 	watcher.informer.AddEventHandler(cache.ResourceEventHandlerFuncs{
 		AddFunc: func(obj interface{}) {
+			watcher.lock.Lock()
 			streamEvent(client, "add", obj.(*v1.Event))
+			watcher.lock.Unlock()
 		},
 		UpdateFunc: func(old interface{}, new interface{}) {
+			watcher.lock.Lock()
 			streamEvent(client, "update", new.(*v1.Event))
+			watcher.lock.Unlock()
 		},
 		DeleteFunc: func(obj interface{}) {
+			watcher.lock.Lock()
 			streamEvent(client, "delete", obj.(*v1.Event))
+			watcher.lock.Unlock()
 		},
 	})
 
