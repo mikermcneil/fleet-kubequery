@@ -52,46 +52,8 @@ metadata:
   name: kubequery-config
   namespace: kubequery
 data:
-  osquery.flags: |
-    # Update flags to suit your requirements
-    --ephemeral=true
-    --disable_logging=true
-    --disable_memory=true
-    --extensions_interval=5
-    --extensions_timeout=5
-    --watchdog_level=-1
-    --verbose
-  osquery.conf: |
-    {
-      "schedule": {
-        "kubernetes_events": {
-          "query": "SELECT * FROM kubernetes_events",
-          "interval": 10
-        },
-        "kubernetes_namespaces": {
-          "query": "SELECT * FROM kubernetes_namespaces",
-          "interval": 600
-        },
-        "kubernetes_role_policy_rules": {
-          "query": "SELECT * FROM kubernetes_role_policy_rules",
-          "interval": 600
-        },
-        "kubernetes_cluster_role_policy_rules": {
-          "query": "SELECT * FROM kubernetes_cluster_role_policy_rules",
-          "interval": 600
-        },
-        "kubernetes_cluster_role_binding_subjects": {
-          "query": "SELECT * FROM kubernetes_cluster_role_binding_subjects",
-          "interval": 600
-        },
-        "kubernetes_pod_security_policies": {
-          "query": "SELECT uid, cluster_uid, name, privileged, host_pid, host_ipc, host_network, allow_privilege_escalation, value AS 'run_as_user_rule' FROM kubernetes_pod_security_policies, json_tree(kubernetes_pod_security_policies.run_as_user) WHERE key = 'rule'",
-          "interval": 600
-        }
-      },
-      "options":{
-      }
-    }
+  kubequery.flags: |
+  kubequery.conf: |
 
 ---
 apiVersion: apps/v1
@@ -121,7 +83,7 @@ spec:
       serviceAccountName: kubequery-sa
       containers:
         - name: kubequery
-          image: uptycs/kubequery:0.3.0
+          image: uptycs/kubequery:latest
           imagePullPolicy: Always
           resources:
             limits:
@@ -132,7 +94,7 @@ spec:
               memory: 200Mi
           volumeMounts:
           - name: config
-            mountPath: /opt/kubequery/config
+            mountPath: /opt/uptycs/config
       volumes:
       - name: config
         configMap:

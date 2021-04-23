@@ -31,9 +31,7 @@ var replacements = map[string]string{
 
 func makeKey(name string) string {
 	for k, v := range replacements {
-		if strings.Contains(name, k) {
-			name = strings.Replace(name, k, v, 1)
-		}
+		name = strings.Replace(name, k, v, 1)
 	}
 	return strcase.ToSnake(name)
 }

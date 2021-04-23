@@ -17,7 +17,7 @@ kubequery tables [schema is available here](docs/schema.md)
 
 ## Build
 
-`Go 1.15` and `make` are required to build kubequery. Run: `make`
+`Go 1.16` and `make` are required to build kubequery. Run: `make`
 
 Container image for master branch will be available on [dockerhub](https://hub.docker.com/r/uptycs/kubequery)
 ```sh
@@ -55,7 +55,7 @@ For production, tagged container images should be used instead of `latest`.
 
 `kubequery-clusterrolebinding` is a ClusterRoleBinding that binds the cluster role with the service account.
 
-`kubequery-config` is a ConfigMap that will be mounted inside the container image as a directory. The contents of this config map should be similar to `/etc/osquery`. For example, osquery.flags, osquery.conf, etc. should be part of this config map.
+`kubequery-config` is a ConfigMap that will be mounted inside the container image as a directory. The contents of this config map should be similar to `/etc/osquery`. For example, kubequery.flags, kubequery.conf, etc. should be part of this config map.
 
 `kubequery` is the Deployment that creates one replica pod. The container launched as a part of the pod is run as non-root user.
 
@@ -68,8 +68,7 @@ kubectl apply -f kubequery.yaml
 Validate the installation was successful by first executing:
 
 ```sh
-kubectl exec -it $(kubectl get pods -n kubequery -o jsonpath='{.items[0].metadata.name}') -- \
-    bash -c 'osqueryi --extension /usr/local/bin/kubequery'
+kubectl exec -it $(kubectl get pods -n kubequery -o jsonpath='{.items[0].metadata.name}') -n kubequery -- kubequeryi
 ```
 
 and then running

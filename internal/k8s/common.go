@@ -519,7 +519,6 @@ func GetCommonVolumeFields(from v1.Volume) CommonVolumeFields {
 	if from.Ephemeral != nil {
 		to.VolumeType = "ephemeral"
 		to.EphemeralVolumeClaimTemplate = from.Ephemeral.VolumeClaimTemplate
-		to.ReadOnly = &from.Ephemeral.ReadOnly
 	}
 	if from.FC != nil {
 		to.VolumeType = "fc"

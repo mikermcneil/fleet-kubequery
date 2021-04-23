@@ -7,13 +7,13 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR GPL-2.0-only)
 
-all: deps test build
+all: deps test build kubequery.yaml
 
 deps:
 	@go mod download
 
 build: deps
-	@go build -ldflags="-s -w -X main.VERSION=${VERSION}" -o . ./...
+	@go build -ldflags="-s -w -X main.VERSION=${VERSION}" -o bin ./...
 
 test:
 	@go test -race -cover ./...
@@ -26,8 +26,18 @@ genschema: build
 	@./genschema      >> docs/schema.md
 	@echo "\`\`\`"    >> docs/schema.md
 
+kubequery.yaml:
+	@sed -e "s/^/    /g" etc/kubequery.flags > etc/kubequery.flags.tmp
+	@sed -e "s/^/    /g" etc/kubequery.conf > etc/kubequery.conf.tmp
+	@sed -e "/kubequery.flags: |/r etc/kubequery.flags.tmp" \
+		-e "/kubequery.conf: |/r etc/kubequery.conf.tmp"    \
+		kubequery-template.yaml > kubequery.yaml
+	@rm -f etc/*.tmp
+
 clean:
-	@rm -f kubequery genschema
+	@rm -f kubequery.yaml bin/kubequery bin/genschema bin/uuidgen etc/*.tmp
 
 .PHONY: all
-    VERSION := $(shell git describe --tags HEAD)
+	ifeq ($(VERSION),)
+		VERSION := $(shell git describe --tags HEAD)
+	endif

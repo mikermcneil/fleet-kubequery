@@ -17,11 +17,6 @@ import (
 	"k8s.io/client-go/kubernetes/fake"
 )
 
-func TestInitClientset(t *testing.T) {
-	err := initClientset(nil)
-	assert.Error(t, err, "Init should fail due to missing kubernetes environment variables")
-}
-
 func TestGetClient(t *testing.T) {
 	SetClient(fake.NewSimpleClientset(), types.UID("uid"), "cluster-name")
 	assert.NotNil(t, GetClient(), "Clientset should be valid")

@@ -12,13 +12,17 @@ package k8s
 import (
 	"context"
 	"fmt"
+	"io/ioutil"
 	"os"
+	"path/filepath"
 	"sync"
 
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"
+	"k8s.io/client-go/tools/clientcmd"
+	"k8s.io/client-go/util/homedir"
 )
 
 var (
@@ -30,10 +34,17 @@ var (
 
 func initClientset(config *rest.Config) error {
 	if config == nil {
-		// Get in-cluster configuration if one is not provided
 		conf, err := rest.InClusterConfig()
 		if err != nil {
-			return err
+			if home := homedir.HomeDir(); home != "" {
+				content, ferr := ioutil.ReadFile(filepath.Join(home, ".kube", "config"))
+				if content != nil && ferr == nil {
+					conf, err = clientcmd.RESTConfigFromKubeConfig(content)
+					if err != nil {
+						return err
+					}
+				}
+			}
 		}
 		config = conf
 	}

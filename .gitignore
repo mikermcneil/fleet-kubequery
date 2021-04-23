@@ -1,4 +1,6 @@
 .vscode
 vendor
-/kubequery
-/genschema
+kubequery.yaml
+/bin/kubequery
+/bin/genschema
+/bin/uuidgen
