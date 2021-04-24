@@ -10,4 +10,4 @@
     --disable_database \
     --disable_events=false \
     -S \
-    --line
+    "$@"
