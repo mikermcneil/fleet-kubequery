@@ -65,16 +65,15 @@ By default pod resource `requests` and `limits` are set to 500m (half a core) an
 kubectl apply -f kubequery.yaml
 ```
 
+Check the status of the pod using the following command. Pod should be in Running Status.
+```sh
+kubectl get pods -n kubequery
+```
+
 Validate the installation was successful by first executing:
 
 ```sh
-kubectl exec -it $(kubectl get pods -n kubequery -o jsonpath='{.items[0].metadata.name}') -n kubequery -- kubequeryi
-```
-
-and then running
-
-```
-.tables kubernetes
+kubectl exec -it $(kubectl get pods -n kubequery -o jsonpath={.items[0].metadata.name}) -n kubequery -- kubequeryi '.tables'
 ```
 
 Which should produce the following output:
@@ -89,6 +88,17 @@ Which should produce the following output:
   => kubernetes_csi_node_drivers
   => kubernetes_daemon_set_containers
   ...
+```
+
+Queries can be run using kubequeryi on the deployed container:
+
+```sh
+kubectl exec -it $(kubectl get pods -n kubequery -o jsonpath={.items[0].metadata.name}) -n kubequery -- kubequeryi --line 'SELECT * FROM kubernetes_pods'
+```
+
+Pod logs can be viewed using:
+```sh
+kubectl logs $(kubectl get pods -n kubequery -o jsonpath={.items[0].metadata.name}) -n kubequery
 ```
 
 ---

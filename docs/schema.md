@@ -988,6 +988,7 @@ CREATE TABLE kubernetes_cron_jobs(
     `set_hostname_as_fqdn` INTEGER,
     `active` TEXT,
     `last_schedule_time` BIGINT,
+    `last_successful_time` BIGINT,
     `schedule` TEXT,
     `starting_deadline_seconds` BIGINT,
     `concurrency_policy` TEXT,
@@ -1067,6 +1068,7 @@ CREATE TABLE kubernetes_jobs(
     `active` INTEGER,
     `succeeded` INTEGER,
     `failed` INTEGER,
+    `completed_indexes` TEXT,
     `parallelism` INTEGER,
     `completions` INTEGER,
     `job_active_deadline_seconds` BIGINT,
@@ -1074,6 +1076,14 @@ CREATE TABLE kubernetes_jobs(
     `selector` TEXT,
     `manual_selector` INTEGER,
     `ttl_seconds_after_finished` INTEGER
+);
+
+CREATE TABLE kubernetes_component_statuses(
+    `name` TEXT,
+    `type` TEXT,
+    `status` TEXT,
+    `message` TEXT,
+    `error` TEXT
 );
 
 CREATE TABLE kubernetes_config_maps(
@@ -1770,6 +1780,8 @@ CREATE TABLE kubernetes_services(
     `ip_families` TEXT,
     `ip_family_policy` TEXT,
     `allocate_load_balancer_node_ports` INTEGER,
+    `load_balancer_class` TEXT,
+    `internal_traffic_policy` TEXT,
     `load_balancer` TEXT,
     `conditions` TEXT
 );
@@ -1889,7 +1901,8 @@ CREATE TABLE kubernetes_pod_disruption_budgets(
     `disruptions_allowed` INTEGER,
     `current_healthy` INTEGER,
     `desired_healthy` INTEGER,
-    `expected_pods` INTEGER
+    `expected_pods` INTEGER,
+    `conditions` TEXT
 );
 
 CREATE TABLE kubernetes_pod_security_policies(
@@ -2012,20 +2025,6 @@ CREATE TABLE kubernetes_csi_node_drivers(
     `node_id` TEXT,
     `topology_keys` TEXT,
     `allocatable` TEXT
-);
-
-CREATE TABLE kubernetes_storage_capacities(
-    `uid` TEXT,
-    `cluster_name` TEXT,
-    `cluster_uid` TEXT,
-    `name` TEXT,
-    `namespace` TEXT,
-    `creation_timestamp` BIGINT,
-    `labels` TEXT,
-    `annotations` TEXT,
-    `node_topology` TEXT,
-    `storage_class_name` TEXT,
-    `capacity` TEXT
 );
 
 CREATE TABLE kubernetes_storage_classes(

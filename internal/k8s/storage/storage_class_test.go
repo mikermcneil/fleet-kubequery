@@ -18,7 +18,7 @@ import (
 )
 
 func TestSGClassesGenerate(t *testing.T) {
-	cnds, err := SGClassesGenerate(context.TODO(), table.QueryContext{})
+	cnds, err := SCClassesGenerate(context.TODO(), table.QueryContext{})
 	assert.Nil(t, err)
 	assert.Equal(t, []map[string]string{
 		{

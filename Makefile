@@ -18,12 +18,15 @@ build: deps
 test:
 	@go test -race -cover ./...
 
+integration:
+	@node integration/index.js
+
 docker: build
 	@docker build --build-arg KUBEQUERY_VERSION=${VERSION} -t uptycs/kubequery:${VERSION} .
 
 genschema: build
 	@echo "\`\`\`sql" >  docs/schema.md
-	@./genschema      >> docs/schema.md
+	@./bin/genschema      >> docs/schema.md
 	@echo "\`\`\`"    >> docs/schema.md
 
 kubequery.yaml:
@@ -37,7 +40,7 @@ kubequery.yaml:
 clean:
 	@rm -f kubequery.yaml bin/kubequery bin/genschema bin/uuidgen etc/*.tmp
 
-.PHONY: all
+.PHONY: all integration
 	ifeq ($(VERSION),)
 		VERSION := $(shell git describe --tags HEAD)
 	endif

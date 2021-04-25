@@ -60,6 +60,7 @@ func GetTables() []Table {
 		{"kubernetes_jobs", batch.JobColumns(), batch.JobsGenerate},
 
 		// Core
+		{"kubernetes_component_statuses", core.ComponentStatusColumns(), core.ComponentStatusesGenerate},
 		{"kubernetes_config_maps", core.ConfigMapColumns(), core.ConfigMapsGenerate},
 		{"kubernetes_endpoint_subsets", core.EndpointSubsetColumns(), core.EndpointSubsetsGenerate},
 		{"kubernetes_limit_ranges", core.LimitRangeColumns(), core.LimitRangesGenerate},
@@ -103,8 +104,8 @@ func GetTables() []Table {
 		// Storage
 		{"kubernetes_csi_drivers", storage.CSIDriverColumns(), storage.CSIDriversGenerate},
 		{"kubernetes_csi_node_drivers", storage.CSINodeDriverColumns(), storage.CSINodeDriversGenerate},
-		{"kubernetes_storage_capacities", storage.CSIStorageCapacityColumns(), storage.CSIStorageCapacitiesGenerate},
-		{"kubernetes_storage_classes", storage.SGClassColumns(), storage.SGClassesGenerate},
+		//{"kubernetes_storage_capacities", storage.CSIStorageCapacityColumns(), storage.CSIStorageCapacitiesGenerate},
+		{"kubernetes_storage_classes", storage.SCClassColumns(), storage.SCClassesGenerate},
 		{"kubernetes_volume_attachments", storage.VolumeAttachmentColumns(), storage.VolumeAttachmentsGenerate},
 	}
 }

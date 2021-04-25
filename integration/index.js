@@ -9,6 +9,7 @@ const TABLES = [
   'api_resources',
   'cluster_role_binding_subjects',
   'cluster_role_policy_rules',
+  'component_statuses',
   'config_maps',
   'cron_jobs',
   'csi_drivers',
@@ -53,7 +54,6 @@ const TABLES = [
   'stateful_set_containers',
   'stateful_set_volumes',
   'stateful_sets',
-  //'storage_capacities',
   'storage_classes',
   'validating_webhooks',
   'volume_attachments'

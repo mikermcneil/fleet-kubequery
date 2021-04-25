@@ -57,6 +57,8 @@ func init() {
 		},
 	}
 
+	csl := &v1.ComponentStatusList{}
+	loadTestResource("component_status_test.json", csl)
 	cm := &v1.ConfigMap{}
 	loadTestResource("config_map_test.json", cm)
 	ep := &v1.Endpoints{}
@@ -74,6 +76,6 @@ func init() {
 	services := &v1.Service{}
 	loadTestResource("services_test.json", services)
 
-	k8s.SetClient(fake.NewSimpleClientset(lr, cm, ep, ns, node, pod, secret, sa, services),
+	k8s.SetClient(fake.NewSimpleClientset(lr, csl, cm, ep, ns, node, pod, secret, sa, services),
 		types.UID("d7fd8e77-93de-4742-9037-5db9a01e966a"), "")
 }
