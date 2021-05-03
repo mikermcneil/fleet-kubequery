@@ -26,6 +26,7 @@ import (
 )
 
 var (
+	// VERSION set by compiler
 	VERSION = "latest"
 
 	version  = flag.Bool("version", false, "Prints kubequery version")

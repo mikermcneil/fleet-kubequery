@@ -7,6 +7,10 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR GPL-2.0-only)
 
+ifeq ($(VERSION),)
+	VERSION := $(shell git describe --tags HEAD)
+endif
+
 all: deps test build kubequery.yaml
 
 deps:
@@ -41,6 +45,3 @@ clean:
 	@rm -f kubequery.yaml bin/kubequery bin/genschema bin/uuidgen etc/*.tmp
 
 .PHONY: all integration
-	ifeq ($(VERSION),)
-		VERSION := $(shell git describe --tags HEAD)
-	endif
