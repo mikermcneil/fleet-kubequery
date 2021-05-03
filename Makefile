@@ -11,10 +11,14 @@ ifeq ($(VERSION),)
 	VERSION := $(shell git describe --tags HEAD)
 endif
 
-all: deps test build kubequery.yaml
+all: deps lint test build kubequery.yaml
 
 deps:
 	@go mod download
+
+lint:
+	@go get golang.org/x/lint/golint
+	@golint ./...
 
 build: deps
 	@go build -ldflags="-s -w -X main.VERSION=${VERSION}" -o bin ./...
@@ -42,6 +46,6 @@ kubequery.yaml:
 	@rm -f etc/*.tmp
 
 clean:
-	@rm -f kubequery.yaml bin/kubequery bin/genschema bin/uuidgen etc/*.tmp
+	@rm -rf vendor kubequery.yaml bin/kubequery bin/genschema bin/uuidgen etc/*.tmp
 
 .PHONY: all integration
