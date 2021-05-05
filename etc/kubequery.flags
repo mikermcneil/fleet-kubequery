@@ -1,4 +1,3 @@
---ephemeral=true
---disable_logging=true
 --extensions_interval=5
 --extensions_timeout=5
+--schedule_splay_percent=50
