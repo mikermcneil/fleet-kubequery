@@ -17,7 +17,7 @@ import (
 
 func main() {
 	for _, t := range tables.GetTables() {
-		fmt.Printf("CREATE TABLE %s(\n", t.Name)
+		fmt.Printf("CREATE TABLE %s (\n", t.Name)
 		for i, c := range t.Columns {
 			fmt.Printf("    `%s` %s", c.Name, c.Type)
 			if i < len(t.Columns)-1 {

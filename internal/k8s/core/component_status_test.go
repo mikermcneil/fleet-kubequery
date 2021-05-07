@@ -22,22 +22,25 @@ func TestComponentStatusesGenerate(t *testing.T) {
 	assert.Nil(t, err)
 	assert.Equal(t, []map[string]string{
 		{
-			"name":    "controller-manager",
-			"message": "ok",
-			"status":  "True",
-			"type":    "Healthy",
+			"cluster_uid": "d7fd8e77-93de-4742-9037-5db9a01e966a",
+			"name":        "controller-manager",
+			"message":     "ok",
+			"status":      "True",
+			"type":        "Healthy",
 		},
 		{
-			"name":    "etcd-0",
-			"message": "{\"health\":\"true\"}",
-			"status":  "True",
-			"type":    "Healthy",
+			"cluster_uid": "d7fd8e77-93de-4742-9037-5db9a01e966a",
+			"name":        "etcd-0",
+			"message":     "{\"health\":\"true\"}",
+			"status":      "True",
+			"type":        "Healthy",
 		},
 		{
-			"name":    "scheduler",
-			"message": "ok",
-			"status":  "True",
-			"type":    "Healthy",
+			"cluster_uid": "d7fd8e77-93de-4742-9037-5db9a01e966a",
+			"name":        "scheduler",
+			"message":     "ok",
+			"status":      "True",
+			"type":        "Healthy",
 		},
 	}, css)
 }

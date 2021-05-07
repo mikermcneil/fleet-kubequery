@@ -16,9 +16,12 @@ import (
 	"github.com/Uptycs/kubequery/internal/k8s"
 	v1 "k8s.io/api/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/types"
 )
 
 type csiNodeDriver struct {
+	ClusterName string
+	ClusterUID  types.UID
 	v1.CSINodeDriver
 }
 
@@ -41,6 +44,8 @@ func CSINodeDriversGenerate(ctx context.Context, queryContext table.QueryContext
 		for _, n := range nodes.Items {
 			for _, d := range n.Spec.Drivers {
 				item := &csiNodeDriver{
+					ClusterName:   k8s.GetClusterName(),
+					ClusterUID:    k8s.GetClusterUID(),
 					CSINodeDriver: d,
 				}
 				results = append(results, k8s.ToMap(item))

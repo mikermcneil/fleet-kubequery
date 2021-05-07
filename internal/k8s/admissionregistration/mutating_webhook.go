@@ -16,9 +16,12 @@ import (
 	"github.com/Uptycs/kubequery/internal/k8s"
 	v1 "k8s.io/api/admissionregistration/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/types"
 )
 
 type mutatingWebhook struct {
+	ClusterName string
+	ClusterUID  types.UID
 	v1.MutatingWebhook
 }
 
@@ -41,6 +44,8 @@ func MutatingWebhooksGenerate(ctx context.Context, queryContext table.QueryConte
 		for _, mwc := range mwcs.Items {
 			for _, mw := range mwc.Webhooks {
 				item := &mutatingWebhook{
+					ClusterName:     k8s.GetClusterName(),
+					ClusterUID:      k8s.GetClusterUID(),
 					MutatingWebhook: mw,
 				}
 				results = append(results, k8s.ToMap(item))

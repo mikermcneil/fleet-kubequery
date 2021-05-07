@@ -16,9 +16,12 @@ import (
 	"github.com/Uptycs/kubequery/internal/k8s"
 	v1 "k8s.io/api/admissionregistration/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/types"
 )
 
 type validatingWebhook struct {
+	ClusterName string
+	ClusterUID  types.UID
 	v1.ValidatingWebhook
 }
 
@@ -41,6 +44,8 @@ func ValidatingWebhooksGenerate(ctx context.Context, queryContext table.QueryCon
 		for _, vwc := range vwcs.Items {
 			for _, vw := range vwc.Webhooks {
 				item := &validatingWebhook{
+					ClusterName:       k8s.GetClusterName(),
+					ClusterUID:        k8s.GetClusterUID(),
 					ValidatingWebhook: vw,
 				}
 				results = append(results, k8s.ToMap(item))

@@ -16,10 +16,13 @@ import (
 	"github.com/Uptycs/kubequery/internal/k8s"
 	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/types"
 )
 
 type componentStatus struct {
-	Name string
+	ClusterName string
+	ClusterUID  types.UID
+	Name        string
 	v1.ComponentCondition
 }
 
@@ -41,7 +44,12 @@ func ComponentStatusesGenerate(ctx context.Context, queryContext table.QueryCont
 
 		for _, cs := range css.Items {
 			for _, cc := range cs.Conditions {
-				item := &componentStatus{Name: cs.ObjectMeta.Name, ComponentCondition: cc}
+				item := &componentStatus{
+					ClusterName:        k8s.GetClusterName(),
+					ClusterUID:         k8s.GetClusterUID(),
+					Name:               cs.ObjectMeta.Name,
+					ComponentCondition: cc,
+				}
 				results = append(results, k8s.ToMap(item))
 			}
 		}

@@ -15,9 +15,12 @@ import (
 	"github.com/Uptycs/basequery-go/plugin/table"
 	"github.com/Uptycs/kubequery/internal/k8s"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/types"
 )
 
 type apiResource struct {
+	ClusterName string
+	ClusterUID  types.UID
 	metav1.APIResource
 	GroupVersion string
 }
@@ -39,6 +42,8 @@ func APIResourcesGenerate(ctx context.Context, queryContext table.QueryContext) 
 	for _, rl := range sr {
 		for _, r := range rl.APIResources {
 			item := &apiResource{
+				ClusterName:  k8s.GetClusterName(),
+				ClusterUID:   k8s.GetClusterUID(),
 				GroupVersion: rl.GroupVersion,
 				APIResource:  r,
 			}
