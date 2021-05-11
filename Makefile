@@ -16,7 +16,8 @@ all: deps lint test build kubequery.yaml
 deps:
 	@go mod download
 
-lint: deps
+lint:
+	@go get -u golang.org/x/lint/golint
 	@golint cmd/... internal/...
 
 build: deps
