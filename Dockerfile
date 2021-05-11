@@ -36,6 +36,7 @@ RUN set -ex; \
     echo "/opt/uptycs/bin/kubequery.ext" > /opt/uptycs/etc/autoload.exts
 
 COPY --from=0 --chown=uptycs:uptycs /usr/bin/osqueryd /opt/uptycs/bin/basequery
+COPY --from=0 --chown=uptycs:uptycs /usr/share/osquery/certs/certs.pem /opt/uptycs/etc/
 COPY --chown=uptycs:uptycs bin/entrypoint.sh bin/kubequeryi bin/uuidgen /opt/uptycs/bin/
 COPY --chown=uptycs:uptycs bin/kubequery /opt/uptycs/bin/kubequery.ext
 

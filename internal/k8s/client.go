@@ -49,6 +49,9 @@ func initClientset(config *rest.Config) error {
 		config = conf
 	}
 
+	// Suppress deprecation warnings
+	config.WarningHandler = rest.NoWarnings{}
+
 	var err error
 	clientset, err = kubernetes.NewForConfig(config)
 	if err != nil {

@@ -249,7 +249,8 @@ type CommonContainerFields struct {
 	Ports                    []v1.ContainerPort
 	EnvFrom                  []v1.EnvFromSource
 	Env                      []v1.EnvVar
-	Resources                v1.ResourceRequirements
+	ResourceLimits           v1.ResourceList
+	ResourceRequests         v1.ResourceList
 	VolumeMounts             []v1.VolumeMount
 	VolumeDevices            []v1.VolumeDevice
 	LivenessProbe            *v1.Probe
@@ -275,7 +276,8 @@ func GetCommonContainerFields(c v1.Container) CommonContainerFields {
 		Ports:                    c.Ports,
 		EnvFrom:                  c.EnvFrom,
 		Env:                      c.Env,
-		Resources:                c.Resources,
+		ResourceLimits:           c.Resources.Limits,
+		ResourceRequests:         c.Resources.Requests,
 		VolumeMounts:             c.VolumeMounts,
 		VolumeDevices:            c.VolumeDevices,
 		LivenessProbe:            c.LivenessProbe,
@@ -306,7 +308,8 @@ func GetCommonEphemeralContainerFields(c v1.EphemeralContainer) CommonContainerF
 		Ports:                    c.Ports,
 		EnvFrom:                  c.EnvFrom,
 		Env:                      c.Env,
-		Resources:                c.Resources,
+		ResourceLimits:           c.Resources.Limits,
+		ResourceRequests:         c.Resources.Requests,
 		VolumeMounts:             c.VolumeMounts,
 		VolumeDevices:            c.VolumeDevices,
 		LivenessProbe:            c.LivenessProbe,

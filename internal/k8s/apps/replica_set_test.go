@@ -67,7 +67,6 @@ func TestReplicaSetContainersGenerate(t *testing.T) {
 			"namespace":                  "default",
 			"ports":                      "[{\"name\":\"metrics\",\"containerPort\":8383,\"protocol\":\"TCP\"}]",
 			"replica_set_name":           "jaeger-operator-5db4f9d996",
-			"resources":                  "{}",
 			"stdin":                      "0",
 			"stdin_once":                 "0",
 			"termination_message_path":   "/dev/termination-log",

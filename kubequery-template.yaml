@@ -52,6 +52,7 @@ metadata:
   name: kubequery-config
   namespace: kubequery
 data:
+  enroll.secret: TODO
   kubequery.flags: |
   kubequery.conf: |
 

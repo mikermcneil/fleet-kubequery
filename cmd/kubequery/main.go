@@ -79,7 +79,7 @@ func main() {
 	}()
 
 	// Wait for the extension manager to start before sending events
-	time.Sleep(time.Second * 3)
+	time.Sleep(time.Second * 5)
 
 	watcher, err := event.CreateEventWatcher(*socket, time.Second*time.Duration(*timeout))
 	if err != nil {

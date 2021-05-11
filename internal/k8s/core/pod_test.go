@@ -76,7 +76,6 @@ func TestPodContainersGenerate(t *testing.T) {
 			"pod_name":                   "jaeger-operator-5db4f9d996-pm7ld",
 			"ports":                      "[{\"name\":\"metrics\",\"containerPort\":8383,\"protocol\":\"TCP\"}]",
 			"ready":                      "1",
-			"resources":                  "{}",
 			"restart_count":              "2",
 			"started":                    "1",
 			"state":                      "{\"running\":{\"startedAt\":\"2021-01-21T01:08:51Z\"}}",
