@@ -77,39 +77,39 @@ func PodContainerColumns() []table.ColumnDefinition {
 	return k8s.GetSchema(&podContainer{})
 }
 
-func createPodContainer(p v1.Pod, c v1.Container, cs v1.ContainerStatus, containerType string) *podContainer {
+func updatePodContainerStatus(pc *podContainer, cs *v1.ContainerStatus) {
+	if cs != nil {
+		pc.State = cs.State
+		pc.LastTerminationState = cs.LastTerminationState
+		pc.Ready = cs.Ready
+		pc.RestartCount = cs.RestartCount
+		pc.ImageID = cs.ImageID
+		pc.ContainerID = cs.ContainerID
+		pc.Started = cs.Started
+	}
+}
+
+func createPodContainer(p v1.Pod, c v1.Container, cs *v1.ContainerStatus, containerType string) *podContainer {
 	item := &podContainer{
 		CommonNamespacedFields: k8s.GetCommonNamespacedFields(p.ObjectMeta),
 		CommonContainerFields:  k8s.GetCommonContainerFields(c),
 		PodName:                p.Name,
 		ContainerType:          containerType,
-		State:                  cs.State,
-		LastTerminationState:   cs.LastTerminationState,
-		Ready:                  cs.Ready,
-		RestartCount:           cs.RestartCount,
-		ImageID:                cs.ImageID,
-		ContainerID:            cs.ContainerID,
-		Started:                cs.Started,
 	}
 	item.Name = c.Name
+	updatePodContainerStatus(item, cs)
 	return item
 }
 
-func createPodEphemeralContainer(p v1.Pod, c v1.EphemeralContainer, cs v1.ContainerStatus) *podContainer {
+func createPodEphemeralContainer(p v1.Pod, c v1.EphemeralContainer, cs *v1.ContainerStatus) *podContainer {
 	item := &podContainer{
 		CommonNamespacedFields: k8s.GetCommonNamespacedFields(p.ObjectMeta),
 		CommonContainerFields:  k8s.GetCommonEphemeralContainerFields(c),
 		PodName:                p.Name,
 		ContainerType:          "ephemeral",
-		State:                  cs.State,
-		LastTerminationState:   cs.LastTerminationState,
-		Ready:                  cs.Ready,
-		RestartCount:           cs.RestartCount,
-		ImageID:                cs.ImageID,
-		ContainerID:            cs.ContainerID,
-		Started:                cs.Started,
 	}
 	item.Name = c.Name
+	updatePodContainerStatus(item, cs)
 	return item
 }
 
@@ -126,15 +126,27 @@ func PodContainersGenerate(ctx context.Context, queryContext table.QueryContext)
 
 		for _, p := range pods.Items {
 			for i, c := range p.Spec.InitContainers {
-				item := createPodContainer(p, c, p.Status.InitContainerStatuses[i], "init")
+				var cs *v1.ContainerStatus = nil
+				if len(p.Status.InitContainerStatuses) > i {
+					cs = &p.Status.InitContainerStatuses[i]
+				}
+				item := createPodContainer(p, c, cs, "init")
 				results = append(results, k8s.ToMap(item))
 			}
 			for i, c := range p.Spec.Containers {
-				item := createPodContainer(p, c, p.Status.ContainerStatuses[i], "container")
+				var cs *v1.ContainerStatus = nil
+				if len(p.Status.ContainerStatuses) > i {
+					cs = &p.Status.ContainerStatuses[i]
+				}
+				item := createPodContainer(p, c, cs, "container")
 				results = append(results, k8s.ToMap(item))
 			}
 			for i, c := range p.Spec.EphemeralContainers {
-				item := createPodEphemeralContainer(p, c, p.Status.EphemeralContainerStatuses[i])
+				var cs *v1.ContainerStatus = nil
+				if len(p.Status.EphemeralContainerStatuses) > i {
+					cs = &p.Status.EphemeralContainerStatuses[i]
+				}
+				item := createPodEphemeralContainer(p, c, cs)
 				results = append(results, k8s.ToMap(item))
 			}
 		}
