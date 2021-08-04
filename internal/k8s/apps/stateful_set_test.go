@@ -22,6 +22,7 @@ func TestStatefulSetsGenerate(t *testing.T) {
 	assert.Nil(t, err)
 	assert.Equal(t, []map[string]string{
 		{
+			"available_replicas":               "0",
 			"cluster_uid":                      "blah",
 			"collision_count":                  "0",
 			"creation_timestamp":               "1611191592",
