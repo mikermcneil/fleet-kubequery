@@ -42,6 +42,7 @@ kubequery.yaml:
 	@sed -e "s/^/    /g" etc/kubequery.conf > etc/kubequery.conf.tmp
 	@sed -e "/kubequery.flags: |/r etc/kubequery.flags.tmp" \
 		-e "/kubequery.conf: |/r etc/kubequery.conf.tmp"    \
+		-e "s/version: latest/version: ${VERSION}/g"        \
 		kubequery-template.yaml > kubequery.yaml
 	@rm -f etc/*.tmp
 
