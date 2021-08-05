@@ -22,7 +22,7 @@ func TestPodDisruptionBudgetsGenerate(t *testing.T) {
 	assert.Nil(t, err)
 	assert.Equal(t, []map[string]string{
 		{
-			"annotations":         "{\"kubectl.kubernetes.io/last-applied-configuration\":\"{\\\"apiVersion\\\":\\\"policy/v1beta1\\\",\\\"kind\\\":\\\"PodDisruptionBudget\\\",\\\"metadata\\\":{\\\"annotations\\\":{},\\\"labels\\\":{\\\"app\\\":\\\"policy\\\",\\\"chart\\\":\\\"mixer\\\",\\\"heritage\\\":\\\"Tiller\\\",\\\"istio\\\":\\\"mixer\\\",\\\"istio-mixer-type\\\":\\\"policy\\\",\\\"release\\\":\\\"istio\\\",\\\"version\\\":\\\"1.5.1\\\"},\\\"name\\\":\\\"istio-policy\\\",\\\"namespace\\\":\\\"istio-system\\\"},\\\"spec\\\":{\\\"minAvailable\\\":1,\\\"selector\\\":{\\\"matchLabels\\\":{\\\"app\\\":\\\"policy\\\",\\\"istio\\\":\\\"mixer\\\",\\\"istio-mixer-type\\\":\\\"policy\\\",\\\"release\\\":\\\"istio\\\"}}}}\\n\"}",
+			"annotations":         "{\"kubectl.kubernetes.io/last-applied-configuration\":\"{\\\"apiVersion\\\":\\\"policy/v1\\\",\\\"kind\\\":\\\"PodDisruptionBudget\\\",\\\"metadata\\\":{\\\"annotations\\\":{},\\\"labels\\\":{\\\"app\\\":\\\"policy\\\",\\\"chart\\\":\\\"mixer\\\",\\\"heritage\\\":\\\"Tiller\\\",\\\"istio\\\":\\\"mixer\\\",\\\"istio-mixer-type\\\":\\\"policy\\\",\\\"release\\\":\\\"istio\\\",\\\"version\\\":\\\"1.5.1\\\"},\\\"name\\\":\\\"istio-policy\\\",\\\"namespace\\\":\\\"istio-system\\\"},\\\"spec\\\":{\\\"minAvailable\\\":1,\\\"selector\\\":{\\\"matchLabels\\\":{\\\"app\\\":\\\"policy\\\",\\\"istio\\\":\\\"mixer\\\",\\\"istio-mixer-type\\\":\\\"policy\\\",\\\"release\\\":\\\"istio\\\"}}}}\\n\"}",
 			"cluster_uid":         "b7fd8e77-93de-4742-9037-5db9a01e966a",
 			"creation_timestamp":  "1611191143",
 			"current_healthy":     "1",

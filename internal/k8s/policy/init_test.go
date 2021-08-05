@@ -15,6 +15,7 @@ import (
 	"path/filepath"
 
 	"github.com/Uptycs/kubequery/internal/k8s"
+	v1 "k8s.io/api/policy/v1"
 	v1beta1 "k8s.io/api/policy/v1beta1"
 	"k8s.io/apimachinery/pkg/types"
 	"k8s.io/client-go/kubernetes/fake"
@@ -34,7 +35,7 @@ func loadTestResource(name string, v interface{}) {
 }
 
 func init() {
-	pdb := &v1beta1.PodDisruptionBudget{}
+	pdb := &v1.PodDisruptionBudget{}
 	loadTestResource("pod_disruption_budget_test.json", pdb)
 	psp := &v1beta1.PodSecurityPolicy{}
 	loadTestResource("pod_security_policy_test.json", psp)

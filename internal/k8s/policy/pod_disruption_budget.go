@@ -14,14 +14,14 @@ import (
 
 	"github.com/Uptycs/basequery-go/plugin/table"
 	"github.com/Uptycs/kubequery/internal/k8s"
-	v1beta1 "k8s.io/api/policy/v1beta1"
+	v1 "k8s.io/api/policy/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 type podDisruptionBudget struct {
 	k8s.CommonNamespacedFields
-	v1beta1.PodDisruptionBudgetSpec
-	v1beta1.PodDisruptionBudgetStatus
+	v1.PodDisruptionBudgetSpec
+	v1.PodDisruptionBudgetStatus
 }
 
 // PodDisruptionBudgetColumns returns kubernetes pod disruption budget fields as Osquery table columns.
@@ -35,7 +35,7 @@ func PodDisruptionBudgetsGenerate(ctx context.Context, queryContext table.QueryC
 	results := make([]map[string]string, 0)
 
 	for {
-		pdbs, err := k8s.GetClient().PolicyV1beta1().PodDisruptionBudgets(metav1.NamespaceAll).List(ctx, options)
+		pdbs, err := k8s.GetClient().PolicyV1().PodDisruptionBudgets(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

@@ -14,17 +14,17 @@ import (
 
 	"github.com/Uptycs/basequery-go/plugin/table"
 	"github.com/Uptycs/kubequery/internal/k8s"
-	v1beta1 "k8s.io/api/batch/v1beta1"
+	v1 "k8s.io/api/batch/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 type cronJob struct {
 	k8s.CommonNamespacedFields
 	k8s.CommonPodFields
-	v1beta1.CronJobStatus
+	v1.CronJobStatus
 	Schedule                   string
 	StartingDeadlineSeconds    *int64
-	ConcurrencyPolicy          v1beta1.ConcurrencyPolicy
+	ConcurrencyPolicy          v1.ConcurrencyPolicy
 	Suspend                    *bool
 	SuccessfulJobsHistoryLimit *int32
 	FailedJobsHistoryLimit     *int32
@@ -48,7 +48,7 @@ func CronJobsGenerate(ctx context.Context, queryContext table.QueryContext) ([]m
 	results := make([]map[string]string, 0)
 
 	for {
-		cjs, err := k8s.GetClient().BatchV1beta1().CronJobs(metav1.NamespaceAll).List(ctx, options)
+		cjs, err := k8s.GetClient().BatchV1().CronJobs(metav1.NamespaceAll).List(ctx, options)
 		if err != nil {
 			return nil, err
 		}

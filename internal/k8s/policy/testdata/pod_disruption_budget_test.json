@@ -1,9 +1,9 @@
 {
-    "apiVersion": "policy/v1beta1",
+    "apiVersion": "policy/v1",
     "kind": "PodDisruptionBudget",
     "metadata": {
         "annotations": {
-            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"policy/v1beta1\",\"kind\":\"PodDisruptionBudget\",\"metadata\":{\"annotations\":{},\"labels\":{\"app\":\"policy\",\"chart\":\"mixer\",\"heritage\":\"Tiller\",\"istio\":\"mixer\",\"istio-mixer-type\":\"policy\",\"release\":\"istio\",\"version\":\"1.5.1\"},\"name\":\"istio-policy\",\"namespace\":\"istio-system\"},\"spec\":{\"minAvailable\":1,\"selector\":{\"matchLabels\":{\"app\":\"policy\",\"istio\":\"mixer\",\"istio-mixer-type\":\"policy\",\"release\":\"istio\"}}}}\n"
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"policy/v1\",\"kind\":\"PodDisruptionBudget\",\"metadata\":{\"annotations\":{},\"labels\":{\"app\":\"policy\",\"chart\":\"mixer\",\"heritage\":\"Tiller\",\"istio\":\"mixer\",\"istio-mixer-type\":\"policy\",\"release\":\"istio\",\"version\":\"1.5.1\"},\"name\":\"istio-policy\",\"namespace\":\"istio-system\"},\"spec\":{\"minAvailable\":1,\"selector\":{\"matchLabels\":{\"app\":\"policy\",\"istio\":\"mixer\",\"istio-mixer-type\":\"policy\",\"release\":\"istio\"}}}}\n"
         },
         "creationTimestamp": "2021-01-21T01:05:43Z",
         "generation": 1,
@@ -18,7 +18,7 @@
         },
         "managedFields": [
             {
-                "apiVersion": "policy/v1beta1",
+                "apiVersion": "policy/v1",
                 "fieldsType": "FieldsV1",
                 "fieldsV1": {
                     "f:metadata": {
@@ -47,7 +47,7 @@
                 "time": "2021-01-21T01:05:43Z"
             },
             {
-                "apiVersion": "policy/v1beta1",
+                "apiVersion": "policy/v1",
                 "fieldsType": "FieldsV1",
                 "fieldsV1": {
                     "f:status": {
@@ -65,7 +65,7 @@
         "name": "istio-policy",
         "namespace": "istio-system",
         "resourceVersion": "451148",
-        "selfLink": "/apis/policy/v1beta1/namespaces/istio-system/poddisruptionbudgets/istio-policy",
+        "selfLink": "/apis/policy/v1/namespaces/istio-system/poddisruptionbudgets/istio-policy",
         "uid": "77dc4487-d95d-40a9-8fdb-f3bbe334c4e3"
     },
     "spec": {

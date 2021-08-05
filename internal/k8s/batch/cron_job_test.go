@@ -17,7 +17,6 @@ import (
 	"github.com/Uptycs/kubequery/internal/k8s"
 	"github.com/stretchr/testify/assert"
 	v1 "k8s.io/api/batch/v1"
-	v1beta1 "k8s.io/api/batch/v1beta1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
 	"k8s.io/client-go/kubernetes/fake"
@@ -27,21 +26,21 @@ func TestCronJobsGenerate(t *testing.T) {
 	i32 := int32(456)
 	i64 := int64(123)
 	b := bool(true)
-	k8s.SetClient(fake.NewSimpleClientset(&v1beta1.CronJob{
+	k8s.SetClient(fake.NewSimpleClientset(&v1.CronJob{
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      "cj1",
 			Namespace: "n123",
 			UID:       types.UID("1234"),
 			Labels:    map[string]string{"a": "b"},
 		},
-		Spec: v1beta1.CronJobSpec{
+		Spec: v1.CronJobSpec{
 			Schedule:                   "s1",
 			StartingDeadlineSeconds:    &i64,
-			ConcurrencyPolicy:          v1beta1.AllowConcurrent,
+			ConcurrencyPolicy:          v1.AllowConcurrent,
 			Suspend:                    &b,
 			SuccessfulJobsHistoryLimit: &i32,
 			FailedJobsHistoryLimit:     &i32,
-			JobTemplate: v1beta1.JobTemplateSpec{
+			JobTemplate: v1.JobTemplateSpec{
 				ObjectMeta: metav1.ObjectMeta{
 					Name:      "job1",
 					Namespace: "n123",
@@ -58,7 +57,7 @@ func TestCronJobsGenerate(t *testing.T) {
 				},
 			},
 		},
-		Status: v1beta1.CronJobStatus{
+		Status: v1.CronJobStatus{
 			LastScheduleTime: &metav1.Time{},
 		},
 	}), types.UID("hello"), "")
