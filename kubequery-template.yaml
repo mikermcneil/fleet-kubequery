@@ -108,12 +108,12 @@ spec:
         image: uptycs/kubequery:latest
         imagePullPolicy: Always
         resources:
-          limits:
-            cpu: 500m
-            memory: 200Mi
           requests:
-            cpu: 500m
-            memory: 200Mi
+            cpu: 200m
+            memory: 128Mi
+          limits:
+            cpu: 1000m
+            memory: 512Mi
         volumeMounts:
         - name: config
           mountPath: /opt/uptycs/config
