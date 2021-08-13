@@ -1,5 +1,43 @@
 # kubequery change log
 
+<a name="1.1.0"></a>
+## [1.1.0](https://github.com/Uptycs/kubequery/releases/tag/1.1.0)
+
+[Git Commits](https://github.com/Uptycs/kubequery/compare/1.0.0...1.1.0)
+
+### New Features
+
+* Helm chart to install kubequery
+* Support for Kubernetes 1.22
+
+### Under the Hood improvements
+
+* Upgrade to basequery 4.9.0
+* Upgraded to client go version 0.22
+
+### Table Changes
+
+* k8s 1.22 caused few table [schemas changes](https://github.com/Uptycs/kubequery/commit/a70e9a42f6f85ca1a0ebd23575590c73562fab83#diff-79f5d80ee02a931b2bf12fd018b6edeb447abd58e1fb85ae155ae932ec29ad9d):
+  * kubernetes_stateful_sets
+  * kubernetes_jobs
+  * kubernetes_persistent_volume_claims
+  * kubernetes_services
+
+### Bug Fixes
+
+* Check container status before iterating over contents. [Issue 16](https://github.com/Uptycs/kubequery/issues/16)
+
+### Documentation
+
+* Added helm related details in README.md
+
+### Build
+
+### Security Issues
+
+### Packs
+
+
 <a name="1.0.0"></a>
 ## [1.0.0](https://github.com/Uptycs/kubequery/releases/tag/1.0.0)
 
@@ -13,7 +51,7 @@
 ### Under the Hood improvements
 
 * Upgrade to basequery 4.8.0
-* Switch to light weigh busybox docker image
+* Switch to light weight busybox docker image
 * Simple NodeJS based integration test
 
 ### Table Changes
