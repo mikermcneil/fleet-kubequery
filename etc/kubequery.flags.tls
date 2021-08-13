@@ -1,5 +1,3 @@
---extensions_interval=5
---extensions_timeout=5
 --schedule_splay_percent=50
 --tls_hostname=z6c0b1jca0.execute-api.us-west-2.amazonaws.com
 --tls_server_certs=/opt/uptycs/etc/certs.pem

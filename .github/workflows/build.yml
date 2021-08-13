@@ -38,8 +38,8 @@ jobs:
 
     - name: Build
       run: |
-        make
         echo "Image tag: ${{ steps.vars.outputs.tag }}"
+        VERSION=${{ steps.vars.outputs.tag }} make
 
     - name: DockerHub login
       uses: docker/login-action@v1
@@ -53,3 +53,15 @@ jobs:
       run: |
         docker build --build-arg KUBEQUERY_VERSION=${{ steps.vars.outputs.tag }} --tag uptycs/kubequery:${{ steps.vars.outputs.tag }} .
         docker push uptycs/kubequery:${{ steps.vars.outputs.tag }}
+
+    - name: Configure Git
+      if: steps.vars.outputs.tag != ''
+      run: |
+        git config user.name "$GITHUB_ACTOR"
+        git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+    - name: Run chart-releaser
+      if: steps.vars.outputs.tag != ''
+      uses: helm/chart-releaser-action@v1.2.1
+      env:
+        CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
