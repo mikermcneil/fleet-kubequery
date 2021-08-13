@@ -11,7 +11,7 @@ ifeq ($(VERSION),)
 	VERSION := $(shell git describe --tags HEAD | cut -d'-' -f1-2 | sed 's/-/./')
 endif
 
-all: deps lint test build kubequery.yaml helm
+all: deps lint test build kubequery.yaml
 
 deps:
 	@go mod download
@@ -45,9 +45,6 @@ kubequery.yaml:
 		-e "s/version: latest/version: ${VERSION}/g"        \
 		kubequery-template.yaml > kubequery.yaml
 	@rm -f etc/*.tmp
-
-helm:
-	@sed -i -e "s/0.0.0/${VERSION}/g" charts/Chart.yaml
 
 clean:
 	@rm -rf vendor kubequery.yaml bin/kubequery bin/genschema bin/uuidgen etc/*.tmp
