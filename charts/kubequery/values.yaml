@@ -34,7 +34,7 @@ config:
   enroll.secret: TODO
 
   # Flags
-  kubequery.flags.: |-
+  kubequery.flags: |-
     --schedule_splay_percent=50
 
   # Config
