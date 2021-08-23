@@ -24,5 +24,4 @@ exec /opt/uptycs/bin/basequery \
     --extensions_require=kubequery \
     --extension_event_tables=kubernetes_events \
     --tls_user_agent=kubequery/${KUBEQUERY_VERSION} \
-    --watchdog_level=-1 \
     -D

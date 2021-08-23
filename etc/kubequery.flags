@@ -1,1 +1,2 @@
 --schedule_splay_percent=50
+--disable_watchdog=true
