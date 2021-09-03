@@ -99,7 +99,7 @@ func StatefulSetContainersGenerate(ctx context.Context, queryContext table.Query
 		for _, ss := range sss.Items {
 			for _, c := range ss.Spec.Template.Spec.InitContainers {
 				item := &statefulSetContainer{
-					CommonNamespacedFields: k8s.GetCommonNamespacedFields(ss.ObjectMeta),
+					CommonNamespacedFields: k8s.GetParentCommonNamespacedFields(ss.ObjectMeta, c.Name),
 					CommonContainerFields:  k8s.GetCommonContainerFields(c),
 					StatefulSetName:        ss.Name,
 					ContainerType:          "init",
@@ -109,7 +109,7 @@ func StatefulSetContainersGenerate(ctx context.Context, queryContext table.Query
 			}
 			for _, c := range ss.Spec.Template.Spec.Containers {
 				item := &statefulSetContainer{
-					CommonNamespacedFields: k8s.GetCommonNamespacedFields(ss.ObjectMeta),
+					CommonNamespacedFields: k8s.GetParentCommonNamespacedFields(ss.ObjectMeta, c.Name),
 					CommonContainerFields:  k8s.GetCommonContainerFields(c),
 					StatefulSetName:        ss.Name,
 					ContainerType:          "container",
@@ -119,7 +119,7 @@ func StatefulSetContainersGenerate(ctx context.Context, queryContext table.Query
 			}
 			for _, c := range ss.Spec.Template.Spec.EphemeralContainers {
 				item := &statefulSetContainer{
-					CommonNamespacedFields: k8s.GetCommonNamespacedFields(ss.ObjectMeta),
+					CommonNamespacedFields: k8s.GetParentCommonNamespacedFields(ss.ObjectMeta, c.Name),
 					CommonContainerFields:  k8s.GetCommonEphemeralContainerFields(c),
 					StatefulSetName:        ss.Name,
 					ContainerType:          "ephemeral",

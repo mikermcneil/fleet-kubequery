@@ -4,6 +4,7 @@ go 1.16
 
 require (
 	github.com/Uptycs/basequery-go v0.6.0
+	github.com/google/uuid v1.3.0
 	github.com/iancoleman/strcase v0.1.3
 	github.com/stretchr/testify v1.7.0
 	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616

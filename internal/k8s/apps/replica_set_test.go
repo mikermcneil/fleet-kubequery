@@ -72,7 +72,7 @@ func TestReplicaSetContainersGenerate(t *testing.T) {
 			"termination_message_path":   "/dev/termination-log",
 			"termination_message_policy": "File",
 			"tty":                        "0",
-			"uid":                        "2efeb411-ff99-434b-a5a2-4e06c2b0afaa",
+			"uid":                        "a9c84883-3d97-5b99-8b20-9fcd5e626a02",
 		},
 	}, rss)
 }

@@ -84,7 +84,7 @@ func TestPodContainersGenerate(t *testing.T) {
 			"termination_message_path":   "/dev/termination-log",
 			"termination_message_policy": "File",
 			"tty":                        "0",
-			"uid":                        "2271363b-ffc9-4f00-984c-e0a125ee2d7a",
+			"uid":                        "2e7d1ce3-8546-5b73-beb8-46c109f37668",
 			"volume_mounts":              "[{\"name\":\"jaeger-operator-token-c94jx\",\"readOnly\":true,\"mountPath\":\"/var/run/secrets/kubernetes.io/serviceaccount\"}]",
 		},
 	}, pcs)

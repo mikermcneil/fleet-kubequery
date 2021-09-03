@@ -90,7 +90,7 @@ func ReplicaSetContainersGenerate(ctx context.Context, queryContext table.QueryC
 		for _, rs := range rss.Items {
 			for _, c := range rs.Spec.Template.Spec.InitContainers {
 				item := &replicaSetContainer{
-					CommonNamespacedFields: k8s.GetCommonNamespacedFields(rs.ObjectMeta),
+					CommonNamespacedFields: k8s.GetParentCommonNamespacedFields(rs.ObjectMeta, c.Name),
 					CommonContainerFields:  k8s.GetCommonContainerFields(c),
 					ReplicaSetName:         rs.Name,
 					ContainerType:          "init",
@@ -100,7 +100,7 @@ func ReplicaSetContainersGenerate(ctx context.Context, queryContext table.QueryC
 			}
 			for _, c := range rs.Spec.Template.Spec.Containers {
 				item := &replicaSetContainer{
-					CommonNamespacedFields: k8s.GetCommonNamespacedFields(rs.ObjectMeta),
+					CommonNamespacedFields: k8s.GetParentCommonNamespacedFields(rs.ObjectMeta, c.Name),
 					CommonContainerFields:  k8s.GetCommonContainerFields(c),
 					ReplicaSetName:         rs.Name,
 					ContainerType:          "container",
@@ -110,7 +110,7 @@ func ReplicaSetContainersGenerate(ctx context.Context, queryContext table.QueryC
 			}
 			for _, c := range rs.Spec.Template.Spec.EphemeralContainers {
 				item := &replicaSetContainer{
-					CommonNamespacedFields: k8s.GetCommonNamespacedFields(rs.ObjectMeta),
+					CommonNamespacedFields: k8s.GetParentCommonNamespacedFields(rs.ObjectMeta, c.Name),
 					CommonContainerFields:  k8s.GetCommonEphemeralContainerFields(c),
 					ReplicaSetName:         rs.Name,
 					ContainerType:          "ephemeral",

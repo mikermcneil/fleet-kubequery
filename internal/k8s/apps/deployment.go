@@ -98,7 +98,7 @@ func DeploymentContainersGenerate(ctx context.Context, queryContext table.QueryC
 		for _, d := range ds.Items {
 			for _, c := range d.Spec.Template.Spec.InitContainers {
 				item := &deploymentContainer{
-					CommonNamespacedFields: k8s.GetCommonNamespacedFields(d.ObjectMeta),
+					CommonNamespacedFields: k8s.GetParentCommonNamespacedFields(d.ObjectMeta, c.Name),
 					CommonContainerFields:  k8s.GetCommonContainerFields(c),
 					DeploymentName:         d.Name,
 					ContainerType:          "init",
@@ -108,7 +108,7 @@ func DeploymentContainersGenerate(ctx context.Context, queryContext table.QueryC
 			}
 			for _, c := range d.Spec.Template.Spec.Containers {
 				item := &deploymentContainer{
-					CommonNamespacedFields: k8s.GetCommonNamespacedFields(d.ObjectMeta),
+					CommonNamespacedFields: k8s.GetParentCommonNamespacedFields(d.ObjectMeta, c.Name),
 					CommonContainerFields:  k8s.GetCommonContainerFields(c),
 					DeploymentName:         d.Name,
 					ContainerType:          "container",
@@ -118,7 +118,7 @@ func DeploymentContainersGenerate(ctx context.Context, queryContext table.QueryC
 			}
 			for _, c := range d.Spec.Template.Spec.EphemeralContainers {
 				item := &deploymentContainer{
-					CommonNamespacedFields: k8s.GetCommonNamespacedFields(d.ObjectMeta),
+					CommonNamespacedFields: k8s.GetParentCommonNamespacedFields(d.ObjectMeta, c.Name),
 					CommonContainerFields:  k8s.GetCommonEphemeralContainerFields(c),
 					DeploymentName:         d.Name,
 					ContainerType:          "ephemeral",

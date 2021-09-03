@@ -10,6 +10,7 @@
 package k8s
 
 import (
+	"github.com/google/uuid"
 	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
@@ -64,6 +65,21 @@ func GetCommonNamespacedFields(obj metav1.ObjectMeta) CommonNamespacedFields {
 		CreationTimestamp: obj.CreationTimestamp,
 		Labels:            obj.Labels,
 		Annotations:       obj.Annotations,
+	}
+}
+
+// GetParentCommonNamespacedFields returns CommonNamespacedFields struct from the parent ObjectMeta creating a UID using parent UID + provided name.
+func GetParentCommonNamespacedFields(parent metav1.ObjectMeta, name string) CommonNamespacedFields {
+	uid := uuid.NewSHA1(uuid.NameSpaceDNS, []byte(string(parent.UID)+name)).String()
+	return CommonNamespacedFields{
+		UID:               types.UID(uid),
+		ClusterName:       GetClusterName(),
+		ClusterUID:        GetClusterUID(),
+		Name:              name,
+		Namespace:         parent.Namespace,
+		CreationTimestamp: parent.CreationTimestamp,
+		Labels:            parent.Labels,
+		Annotations:       parent.Annotations,
 	}
 }
 

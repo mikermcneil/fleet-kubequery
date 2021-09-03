@@ -91,7 +91,7 @@ func updatePodContainerStatus(pc *podContainer, cs *v1.ContainerStatus) {
 
 func createPodContainer(p v1.Pod, c v1.Container, cs *v1.ContainerStatus, containerType string) *podContainer {
 	item := &podContainer{
-		CommonNamespacedFields: k8s.GetCommonNamespacedFields(p.ObjectMeta),
+		CommonNamespacedFields: k8s.GetParentCommonNamespacedFields(p.ObjectMeta, c.Name),
 		CommonContainerFields:  k8s.GetCommonContainerFields(c),
 		PodName:                p.Name,
 		ContainerType:          containerType,
@@ -103,7 +103,7 @@ func createPodContainer(p v1.Pod, c v1.Container, cs *v1.ContainerStatus, contai
 
 func createPodEphemeralContainer(p v1.Pod, c v1.EphemeralContainer, cs *v1.ContainerStatus) *podContainer {
 	item := &podContainer{
-		CommonNamespacedFields: k8s.GetCommonNamespacedFields(p.ObjectMeta),
+		CommonNamespacedFields: k8s.GetParentCommonNamespacedFields(p.ObjectMeta, c.Name),
 		CommonContainerFields:  k8s.GetCommonEphemeralContainerFields(c),
 		PodName:                p.Name,
 		ContainerType:          "ephemeral",

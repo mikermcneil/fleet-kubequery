@@ -70,7 +70,7 @@ func PodTemplateContainerColumns() []table.ColumnDefinition {
 
 func createPodTemplateContainer(pt v1.PodTemplate, c v1.Container, containerType string) *podTemplateContainer {
 	item := &podTemplateContainer{
-		CommonNamespacedFields: k8s.GetCommonNamespacedFields(pt.ObjectMeta),
+		CommonNamespacedFields: k8s.GetParentCommonNamespacedFields(pt.ObjectMeta, c.Name),
 		CommonContainerFields:  k8s.GetCommonContainerFields(c),
 		PodTemplateName:        pt.Name,
 		ContainerType:          containerType,
@@ -81,7 +81,7 @@ func createPodTemplateContainer(pt v1.PodTemplate, c v1.Container, containerType
 
 func createPodTemplateEphemeralContainer(pt v1.PodTemplate, c v1.EphemeralContainer) *podTemplateContainer {
 	item := &podTemplateContainer{
-		CommonNamespacedFields: k8s.GetCommonNamespacedFields(pt.ObjectMeta),
+		CommonNamespacedFields: k8s.GetParentCommonNamespacedFields(pt.ObjectMeta, c.Name),
 		CommonContainerFields:  k8s.GetCommonEphemeralContainerFields(c),
 		PodTemplateName:        pt.Name,
 		ContainerType:          "ephemeral",

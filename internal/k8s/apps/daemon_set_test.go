@@ -79,7 +79,7 @@ func TestDaemonSetContainersGenerate(t *testing.T) {
 			"termination_message_path":   "/dev/termination-log",
 			"termination_message_policy": "File",
 			"tty":                        "0",
-			"uid":                        "e6fed7f0-f79a-464f-a3d2-b63247a1f590",
+			"uid":                        "8b0b4bb2-1703-551e-9e14-af10886a5eec",
 			"volume_mounts":              "[{\"name\":\"host-local-net-dir\",\"mountPath\":\"/var/lib/cni/networks\"},{\"name\":\"cni-bin-dir\",\"mountPath\":\"/host/opt/cni/bin\"}]",
 		},
 		{
@@ -101,7 +101,7 @@ func TestDaemonSetContainersGenerate(t *testing.T) {
 			"termination_message_path":   "/dev/termination-log",
 			"termination_message_policy": "File",
 			"tty":                        "0",
-			"uid":                        "e6fed7f0-f79a-464f-a3d2-b63247a1f590",
+			"uid":                        "e773308e-cb75-5c58-9d85-0b71c92f8a24",
 			"volume_mounts":              "[{\"name\":\"cni-bin-dir\",\"mountPath\":\"/host/opt/cni/bin\"},{\"name\":\"cni-net-dir\",\"mountPath\":\"/host/etc/cni/net.d\"}]",
 		},
 		{
@@ -121,7 +121,7 @@ func TestDaemonSetContainersGenerate(t *testing.T) {
 			"termination_message_path":   "/dev/termination-log",
 			"termination_message_policy": "File",
 			"tty":                        "0",
-			"uid":                        "e6fed7f0-f79a-464f-a3d2-b63247a1f590",
+			"uid":                        "8122bba4-1bdc-562f-9a01-96345dbc3e4c",
 			"volume_mounts":              "[{\"name\":\"flexvol-driver-host\",\"mountPath\":\"/host/driver\"}]",
 		},
 		{
@@ -145,7 +145,7 @@ func TestDaemonSetContainersGenerate(t *testing.T) {
 			"termination_message_path":   "/dev/termination-log",
 			"termination_message_policy": "File",
 			"tty":                        "0",
-			"uid":                        "e6fed7f0-f79a-464f-a3d2-b63247a1f590",
+			"uid":                        "7f7da4e6-2c04-5e4e-aedb-bd1e9e8e5469",
 			"volume_mounts":              "[{\"name\":\"lib-modules\",\"readOnly\":true,\"mountPath\":\"/lib/modules\"},{\"name\":\"xtables-lock\",\"mountPath\":\"/run/xtables.lock\"},{\"name\":\"var-run-calico\",\"mountPath\":\"/var/run/calico\"},{\"name\":\"var-lib-calico\",\"mountPath\":\"/var/lib/calico\"},{\"name\":\"policysync\",\"mountPath\":\"/var/run/nodeagent\"}]",
 		},
 	}, dss)

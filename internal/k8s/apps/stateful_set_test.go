@@ -84,7 +84,7 @@ func TestStatefulSetContainersGenerate(t *testing.T) {
 			"termination_message_path":   "/dev/termination-log",
 			"termination_message_policy": "FallbackToLogsOnError",
 			"tty":                        "0",
-			"uid":                        "3c488e7e-420c-4515-b377-5dc3ee082744",
+			"uid":                        "da9bb224-1bf1-5960-a83c-b77a73ea6e79",
 			"volume_mounts":              "[{\"name\":\"config-volume\",\"mountPath\":\"/etc/alertmanager/config\"},{\"name\":\"alertmanager-main-db\",\"mountPath\":\"/alertmanager\"}]",
 		},
 		{
@@ -104,7 +104,7 @@ func TestStatefulSetContainersGenerate(t *testing.T) {
 			"termination_message_path":   "/dev/termination-log",
 			"termination_message_policy": "FallbackToLogsOnError",
 			"tty":                        "0",
-			"uid":                        "3c488e7e-420c-4515-b377-5dc3ee082744",
+			"uid":                        "69afdc5a-a3de-59b5-8151-4103b933f2cf",
 			"volume_mounts":              "[{\"name\":\"config-volume\",\"readOnly\":true,\"mountPath\":\"/etc/alertmanager/config\"}]",
 		},
 	}, sss)
