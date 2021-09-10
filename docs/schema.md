@@ -1625,6 +1625,7 @@ CREATE TABLE kubernetes_pod_containers (
   `last_termination_state` TEXT,
   `ready` INTEGER,
   `restart_count` INTEGER,
+  `image_repo` TEXT,
   `image_id` TEXT,
   `container_id` TEXT,
   `started` INTEGER

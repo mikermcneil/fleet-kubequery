@@ -11,6 +11,7 @@ package core
 
 import (
 	"context"
+	"strings"
 
 	"github.com/Uptycs/basequery-go/plugin/table"
 	"github.com/Uptycs/kubequery/internal/k8s"
@@ -67,6 +68,7 @@ type podContainer struct {
 	LastTerminationState v1.ContainerState
 	Ready                bool
 	RestartCount         int32
+	ImageRepo            string
 	ImageID              string
 	ContainerID          string
 	Started              *bool
@@ -77,14 +79,41 @@ func PodContainerColumns() []table.ColumnDefinition {
 	return k8s.GetSchema(&podContainer{})
 }
 
+func getImageRepo(id string) string {
+	// docker.io/jaegertracing/jaeger-operator@sha256:5a3198179f7972028a29dd7fbf71ac7a21e0dbf46c85e8cc2c37e3b6a5ee26a4
+	index := strings.LastIndex(id, "@")
+	if index < 0 || index == len(id)-1 {
+		return ""
+	}
+	return id[0:index]
+}
+
+func cleanID(id string) string {
+	// containerd://4a8e3f149f24fb5d4429f4a38e86097e1aec3b6b174bb382a44c6706ad4406e1
+	// docker.io/jaegertracing/jaeger-operator@sha256:5a3198179f7972028a29dd7fbf71ac7a21e0dbf46c85e8cc2c37e3b6a5ee26a4
+	index := -1
+	for _, s := range []string{"/", ":", "@"} {
+		i := strings.LastIndex(id, s)
+		if i > -1 && i > index {
+			index = i
+		}
+	}
+
+	if index < 0 || index == len(id)-1 {
+		return id
+	}
+	return id[index+1:]
+}
+
 func updatePodContainerStatus(pc *podContainer, cs *v1.ContainerStatus) {
 	if cs != nil {
 		pc.State = cs.State
 		pc.LastTerminationState = cs.LastTerminationState
 		pc.Ready = cs.Ready
 		pc.RestartCount = cs.RestartCount
-		pc.ImageID = cs.ImageID
-		pc.ContainerID = cs.ContainerID
+		pc.ImageRepo = getImageRepo(cs.ImageID)
+		pc.ImageID = cleanID(cs.ImageID)
+		pc.ContainerID = cleanID(cs.ContainerID)
 		pc.Started = cs.Started
 	}
 }
