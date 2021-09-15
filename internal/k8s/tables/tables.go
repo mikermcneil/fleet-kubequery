@@ -104,7 +104,7 @@ func GetTables() []Table {
 		// Storage
 		{"kubernetes_csi_drivers", storage.CSIDriverColumns(), storage.CSIDriversGenerate},
 		{"kubernetes_csi_node_drivers", storage.CSINodeDriverColumns(), storage.CSINodeDriversGenerate},
-		//{"kubernetes_storage_capacities", storage.CSIStorageCapacityColumns(), storage.CSIStorageCapacitiesGenerate},
+		// {"kubernetes_storage_capacities", storage.CSIStorageCapacityColumns(), storage.CSIStorageCapacitiesGenerate},
 		{"kubernetes_storage_classes", storage.SCClassColumns(), storage.SCClassesGenerate},
 		{"kubernetes_volume_attachments", storage.VolumeAttachmentColumns(), storage.VolumeAttachmentsGenerate},
 	}

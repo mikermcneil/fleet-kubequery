@@ -33,8 +33,9 @@ docker: build
 	@docker build --build-arg KUBEQUERY_VERSION=${VERSION} -t uptycs/kubequery:${VERSION} .
 
 genschema: build
+	@./bin/gentables  >  docs/tables.json
 	@echo "\`\`\`sql" >  docs/schema.md
-	@./bin/genschema      >> docs/schema.md
+	@./bin/genschema  >> docs/schema.md
 	@echo "\`\`\`"    >> docs/schema.md
 
 kubequery.yaml:
