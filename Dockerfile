@@ -7,7 +7,7 @@
 
 FROM ubuntu:20.04 AS builder
 
-ARG BASEQUERY_VERSION=4.9.1
+ARG BASEQUERY_VERSION=5.0.1
 
 ADD https://uptycs-basequery.s3.amazonaws.com/${BASEQUERY_VERSION}/basequery_${BASEQUERY_VERSION}-1.linux_amd64.deb /tmp/basequery.deb
 
@@ -35,8 +35,8 @@ RUN set -ex; \
     mkdir /opt/uptycs/bin /opt/uptycs/etc /opt/uptycs/logs /opt/uptycs/var && \
     echo "/opt/uptycs/bin/kubequery.ext" > /opt/uptycs/etc/autoload.exts
 
-COPY --from=0 --chown=uptycs:uptycs /usr/bin/osqueryd /opt/uptycs/bin/basequery
-COPY --from=0 --chown=uptycs:uptycs /usr/share/osquery/certs/certs.pem /opt/uptycs/etc/
+COPY --from=0 --chown=uptycs:uptycs /opt/osquery/bin/osqueryd /opt/uptycs/bin/basequery
+COPY --from=0 --chown=uptycs:uptycs opt/osquery/share/osquery/certs/certs.pem /opt/uptycs/etc/
 COPY --chown=uptycs:uptycs bin/entrypoint.sh bin/kubequeryi bin/uuidgen /opt/uptycs/bin/
 COPY --chown=uptycs:uptycs bin/kubequery /opt/uptycs/bin/kubequery.ext
 
