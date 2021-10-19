@@ -101,10 +101,6 @@ config:
           "query": "SELECT * FROM kubernetes_endpoint_subsets",
           "interval": 1800
         },
-        "kubernetes_events": {
-          "query": "SELECT * FROM kubernetes_events",
-          "interval": 10
-        },
         "kubernetes_horizontal_pod_autoscalers": {
           "query": "SELECT * FROM kubernetes_horizontal_pod_autoscalers",
           "interval": 7200
