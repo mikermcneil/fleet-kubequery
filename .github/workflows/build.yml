@@ -33,10 +33,10 @@ jobs:
           echo ::set-output name=tag::
         fi
 
-    - name: Set up Go 1.16
+    - name: Set up Go
       uses: actions/setup-go@v2
       with:
-        go-version: 1.16
+        go-version: 1.17
 
     - name: Build
       run: |
@@ -59,8 +59,8 @@ jobs:
     - name: Configure Git
       if: steps.vars.outputs.tag != ''
       run: |
-        git config user.name "$GITHUB_ACTOR"
-        git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+        git config user.name "uptycsdog"
+        git config user.email "bot@uptycs.com"
 
     - name: Run chart-releaser
       if: steps.vars.outputs.tag != ''

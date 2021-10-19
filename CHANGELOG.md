@@ -1,5 +1,31 @@
 # kubequery change log
 
+
+<a name="1.1.1"></a>
+## [1.1.1](https://github.com/Uptycs/kubequery/releases/tag/1.1.1)
+
+[Git Commits](https://github.com/Uptycs/kubequery/compare/1.1.0...1.1.1)
+
+### New Features
+
+### Under the Hood improvements
+
+* Upgrade to basequery 5.0.2
+* Upgraded to Go 1.17
+
+### Table Changes
+
+### Bug Fixes
+
+### Documentation
+
+### Build
+
+### Security Issues
+
+### Packs
+
+
 <a name="1.1.0"></a>
 ## [1.1.0](https://github.com/Uptycs/kubequery/releases/tag/1.1.0)
 

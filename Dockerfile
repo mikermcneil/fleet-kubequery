@@ -7,7 +7,7 @@
 
 FROM ubuntu:20.04 AS builder
 
-ARG BASEQUERY_VERSION=5.0.1
+ARG BASEQUERY_VERSION=5.0.2
 
 ADD https://uptycs-basequery.s3.amazonaws.com/${BASEQUERY_VERSION}/basequery_${BASEQUERY_VERSION}-1.linux_amd64.deb /tmp/basequery.deb
 

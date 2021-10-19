@@ -17,7 +17,7 @@ deps:
 	@go mod download
 
 lint:
-	@go get -u golang.org/x/lint/golint
+	@go install golang.org/x/lint/golint
 	@golint cmd/... internal/...
 
 build: deps
