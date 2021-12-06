@@ -9,7 +9,7 @@
 
 kubequery is a [Osquery](https://osquery.io) extension that provides SQL based analytics for [Kubernetes](https://kubernetes.io) clusters
 
-kubequery will be packaged as docker image available from [dockerhub](https://hub.docker.com/r/uptycs/kubequery). It is expected to be deployed as a [Kubernetes Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment) per cluster. A sample deployment template is available [here](kubequery.yaml)
+kubequery will be packaged as docker image available from [dockerhub](https://hub.docker.com/r/uptycs/kubequery). It is expected to be deployed as a [Kubernetes Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment) per cluster. A sample deployment template is available [here](kubequery-template.yaml)
 
 kubequery tables [schema is available here](docs/schema.md)
 
@@ -30,7 +30,7 @@ For production, tagged container images should be used instead of `latest`.
 
 ## Deployment
 
-[kubequery.yaml](kubequery.yaml) is a template that creates the following Kubernetes resources:
+[kubequery-template.yaml](kubequery-template.yaml) is a template that creates the following Kubernetes resources:
 * [Namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
 * [ServiceAccount](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#service-account-tokens)
 * [ClusterRole](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#role-and-clusterrole)
@@ -73,7 +73,7 @@ kubectl get pods -n kubequery
 Validate the installation was successful by first executing:
 
 ```sh
-kubectl exec -it $(kubectl get pods -n kubequery -o jsonpath={.items[0].metadata.name}) -n kubequery -- kubequeryi '.tables'
+kubectl exec -it $(kubectl get pods -n kubequery -o jsonpath='{.items[0].metadata.name}') -n kubequery -- kubequeryi '.tables'
 ```
 
 Which should produce the following output:
@@ -93,12 +93,12 @@ Which should produce the following output:
 Queries can be run using kubequeryi on the deployed container:
 
 ```sh
-kubectl exec -it $(kubectl get pods -n kubequery -o jsonpath={.items[0].metadata.name}) -n kubequery -- kubequeryi --line 'SELECT * FROM kubernetes_pods'
+kubectl exec -it $(kubectl get pods -n kubequery -o jsonpath='{.items[0].metadata.name}') -n kubequery -- kubequeryi --line 'SELECT * FROM kubernetes_pods'
 ```
 
 Pod logs can be viewed using:
 ```sh
-kubectl logs $(kubectl get pods -n kubequery -o jsonpath={.items[0].metadata.name}) -n kubequery
+kubectl logs $(kubectl get pods -n kubequery -o jsonpath='{.items[0].metadata.name}') -n kubequery
 ```
 
 ## Helm
