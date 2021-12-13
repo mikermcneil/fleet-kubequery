@@ -29,8 +29,9 @@ var (
 	// VERSION set by compiler
 	VERSION = "latest"
 
-	version  = flag.Bool("version", false, "Prints kubequery version")
+	//lint:ignore U1000 Argument is required by basequery
 	verbose  = flag.Bool("verbose", false, "Whether to enable verbose logging")
+	version  = flag.Bool("version", false, "Prints kubequery version")
 	socket   = flag.String("socket", "", "Path to the extensions UNIX domain socket")
 	timeout  = flag.Int("timeout", 5, "Seconds to wait for autoloaded extensions")
 	interval = flag.Int("interval", 5, "Seconds delay between connectivity checks")
