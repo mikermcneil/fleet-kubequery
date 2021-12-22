@@ -17,7 +17,7 @@ kubequery tables [schema is available here](docs/schema.md)
 
 ## Build
 
-`Go 1.16` and `make` are required to build kubequery. Run: `make`
+`Go 1.17` and `make` are required to build kubequery. Run: `make`
 
 Container image for master branch will be available on [dockerhub](https://hub.docker.com/r/uptycs/kubequery)
 ```sh
